@@ -1,0 +1,18 @@
+if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+	for f in /etc/X11/xinit/xinitrc.d/* ; do
+		[ -x "$f" ] && . "$f"
+	done
+	unset f
+fi
+VboxClient-all &
+#xrdb -merge .Xresources
+setxkbmap -option terminate:ctrl_alt_bksp
+setxkbmap -option caps:escape
+#xsetroot -cursor_name left_ptr
+#xcompmgr &
+#hsetroot -fill background.jpg &
+#trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --tint 0x191970 --height 12 &
+xrandr --output LVDS --auto --output HDMI-0 --left-of LVDS --primary --auto --output VGA-0 --left-of LVDS --primary --auto --output DVI-0 --left-of LVDS --primary --auto
+xrandr --output VBOX1 --left-of VBOX0 --primary --auto
+exec awesome
+
