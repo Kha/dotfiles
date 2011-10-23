@@ -12,7 +12,6 @@ setxkbmap -option caps:escape
 #xcompmgr &
 #hsetroot -fill background.jpg &
 #trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --tint 0x191970 --height 12 &
-xrandr --output LVDS --auto --output HDMI-0 --left-of LVDS --primary --auto --output VGA-0 --left-of LVDS --primary --auto --output DVI-0 --left-of LVDS --primary --auto
-xrandr --output VBOX1 --primary --auto --left-of VBOX0
+bash ./.xrandr
 #exec gdm #awesome
 
