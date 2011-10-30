@@ -13,3 +13,7 @@
 	svnmerge = !git svn fetch && git merge remotes/git-svn
 [merge]
 	tool = kdiff3
+[color]
+	diff = auto
+	status = auto
+	branch = auto
