@@ -1,0 +1,4 @@
+#include "/home/kha/.xrdb/look-zenburn.xrdb"
+
+XTerm*faceName: Inconsolata
+XTerm*faceSize: 13
