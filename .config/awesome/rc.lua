@@ -357,7 +357,7 @@ root.keys(globalkeys)
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
-      properties = { border_width = beautiful.border_width,
+      properties = { border_width = 0, --beautiful.border_width,
                      border_color = beautiful.border_normal,
                      focus = true,
                      keys = clientkeys,
@@ -405,6 +405,6 @@ client.add_signal("manage", function (c, startup)
     end
 end)
 
-client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.add_signal("focus", function(c) c.opacity = c.class == "XTerm" and 0.9 or 1; c.border_color = beautiful.border_focus end)
+client.add_signal("unfocus", function(c) c.opacity = 0.8; c.border_color = beautiful.border_normal end)
 -- }}}
