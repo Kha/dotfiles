@@ -168,6 +168,45 @@ root.buttons(awful.util.table.join(
 -- }}}
 
 -- {{{ Key bindings
+function usefuleval(s)
+    local f, err = loadstring("return "..s);
+    if not f then
+        f, err = loadstring(s);
+    end
+    
+    if f then
+        setfenv(f, _G);
+        local ret = { pcall(f) };
+        if ret[1] then
+            -- Ok
+            table.remove(ret, 1)
+            local highest_index = #ret;
+            for k, v in pairs(ret) do
+                if type(k) == "number" and k > highest_index then
+                    highest_index = k;
+                end
+                ret[k] = select(2, pcall(tostring, ret[k])) or "<no value>";
+            end
+            -- Fill in the gaps
+            for i = 1, highest_index do
+                if not ret[i] then
+                    ret[i] = "nil"
+                end
+            end
+            if highest_index > 0 then
+                naughty.notify({ text = awful.util.escape("Result"..(highest_index > 1 and "s" or "")..": "..tostring(table.concat(ret, ", "))), screen = mouse.screen});
+            else
+                naughty.notify({ text = "Result: Nothing", screen = mouse.screen});
+            end
+        else
+            err = ret[2];
+        end
+    end
+    if err then
+        naughty.notify({text = awful.util.escape("Error: "..tostring(err)), screen = mouse.screen});
+    end
+end
+
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
@@ -198,10 +237,26 @@ globalkeys = awful.util.table.join(
                 client.focus:raise()
             end
         end),
+    -- move all clients of active tags to next screen
+    awful.key({ modkey, "control" }, "o",
+        function ()
+            for i,t in ipairs(screen[mouse.screen]:tags()) do
+                if t.selected then
+                    for j,c in ipairs(t:clients()) do
+                        awful.client.movetoscreen(c)
+                    end
+               end
+            end
+        end),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey, "Control" }, "r", awesome.restart),
+    awful.key({ modkey, "Control" }, "r", 
+        function ()
+            os.execute("killall xcompmgr")
+            awesome.restart()
+            os.execute("(sleep 5 && xcompmgr -cF) &")
+        end),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
@@ -222,7 +277,7 @@ globalkeys = awful.util.table.join(
               function ()
                   awful.prompt.run({ prompt = "Run Lua code: " },
                   mypromptbox[mouse.screen].widget,
-                  awful.util.eval, nil,
+                  usefuleval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
               end)
 )
@@ -317,7 +372,7 @@ awful.rules.rules = {
 --    { rule = { class = "Firefox" },
 --      properties = { tag = tags[1][2] } },
     { rule = { class = "Pidgin" },
-      properties = { tag = tags[1][3] } },
+      properties = { tag = tags[screen.count() >= 2 and 2 or 1][3] } },
     { rule = { class = "XTerm" },
       properties = { opacity = 0.9 } },
 }
