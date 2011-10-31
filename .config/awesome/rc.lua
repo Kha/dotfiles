@@ -255,7 +255,7 @@ globalkeys = awful.util.table.join(
         function ()
             os.execute("killall xcompmgr")
             awesome.restart()
-            os.execute("(sleep 5 && xcompmgr -cF) &")
+            os.execute("(sleep 5 && xcompmgr -cCf) &")
         end),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 

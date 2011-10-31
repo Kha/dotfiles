@@ -4,6 +4,14 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 	done
 	unset f
 fi
+
+alias ls='ls --color=auto'
+alias myg++="g++ -Wall -O2 -g -static"
+
+export PATH=$PATH:~/.cabal/bin
+export EDITOR=/usr/bin/vim
+export TERM=xterm-256color
+
 VBoxClient-all &
 xcompmgr -cCF &
 xrdb -merge ~/.Xresources
