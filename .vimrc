@@ -89,3 +89,9 @@ autocmd BufReadPost *
 set mouse=a
 set t_Co=256
 colorscheme zenburn
+
+" http://stackoverflow.com/questions/2575545/vim-pipe-selected-text-to-shell-cmd-and-receive-output-on-vim-info-command-line/2585673#2585673
+function Test() range
+  echo system(join(getline(a:firstline, a:lastline), "\n"))
+endfunction
+com -range=% Test :<line1>,<line2>call Test()
