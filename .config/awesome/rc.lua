@@ -238,7 +238,7 @@ globalkeys = awful.util.table.join(
             end
         end),
     -- move all clients of active tags to next screen
-    awful.key({ modkey, "control" }, "o",
+    awful.key({ modkey, "Control" }, "o",
         function ()
             for i,t in ipairs(screen[mouse.screen]:tags()) do
                 if t.selected then
@@ -254,8 +254,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "r", 
         function ()
             os.execute("killall xcompmgr")
+            os.execute("(sleep 2 && xcompmgr -cC) &")
+            os.execute("touch /tmp/fabin")
             awesome.restart()
-            os.execute("(sleep 5 && xcompmgr -cCf) &")
         end),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
