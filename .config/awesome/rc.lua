@@ -359,6 +359,7 @@ awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
       properties = { border_width = 0, --beautiful.border_width,
+                     size_hints_honor = false,
                      border_color = beautiful.border_normal,
                      focus = true,
                      keys = clientkeys,
