@@ -72,7 +72,7 @@ filetype plugin indent on
 " syntax highlight
 syntax on
 
-" we use a dark background, don't we? No
+" we use a dark background, don't we?
 set bg=dark
 
 " Always show the menu, insert longest match

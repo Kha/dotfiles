@@ -8,6 +8,11 @@ require("beautiful")
 require("naughty")
 require("revelation")
 
+function dbg(vars)
+    local text = ""
+    for i=1, #vars do text = text .. vars[i] .. " | " end
+    return text
+end
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init(".config/awesome/themes/zenburn/theme.lua")
@@ -255,7 +260,6 @@ globalkeys = awful.util.table.join(
         function ()
             os.execute("killall xcompmgr")
             os.execute("(sleep 2 && xcompmgr -cC) &")
-            os.execute("touch /tmp/fabin")
             awesome.restart()
         end),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
@@ -408,5 +412,5 @@ client.add_signal("manage", function (c, startup)
 end)
 
 client.add_signal("focus", function(c) c.opacity = c.class == "XTerm" and 0.9 or 1; c.border_color = beautiful.border_focus end)
-client.add_signal("unfocus", function(c) c.opacity = 0.8; c.border_color = beautiful.border_normal end)
+client.add_signal("unfocus", function(c) if not c.fullscreen then c.opacity = 0.8; end; c.border_color = beautiful.border_normal end)
 -- }}}
