@@ -8,7 +8,6 @@
 [difftool]
 	prompt = false
 [alias]
-	co = !git clean -Xfd && git checkout
 	aa = commit -a -C HEAD --amend
 	svnmerge = !git svn fetch && git merge remotes/git-svn
 [merge]

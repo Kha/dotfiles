@@ -92,6 +92,8 @@ colorscheme zenburn
 
 " http://stackoverflow.com/questions/2575545/vim-pipe-selected-text-to-shell-cmd-and-receive-output-on-vim-info-command-line/2585673#2585673
 function Test() range
-  echo system(join(getline(a:firstline, a:lastline), "\n"))
+  let lines = join(getline(a:firstline, a:lastline), "\n")
+  echo shellescape(lines)
+  echo system(lines)
 endfunction
 com -range=% Test :<line1>,<line2>call Test()
