@@ -3,16 +3,18 @@
 [user]
 	email = sebasti@nullrich.de
 	name = Sebastian Ullrich
+[color]
+	ui = auto
 [diff]
 	guitool = kdiff3
 [difftool]
 	prompt = false
 [alias]
+	co = checkout
 	aa = commit -a -C HEAD --amend
-	svnmerge = !git svn fetch && git merge remotes/git-svn
+	pupu = !git pull && git push
+	sudopull = !git stash && git pull && git stash pop
+	sudopupu = !git stash && git pull && git stash pop && git push
+	st = status -s
 [merge]
 	tool = kdiff3
-[color]
-	diff = auto
-	status = auto
-	branch = auto
