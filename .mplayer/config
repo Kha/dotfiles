@@ -1,0 +1,8 @@
+# Specify default video driver (see -vo help for a list).
+vo=xv
+
+# Start in fullscreen mode by default.
+fs=yes
+
+# Disable screensaver.
+stop-xscreensaver="yes" # stop gnome-screensaver
