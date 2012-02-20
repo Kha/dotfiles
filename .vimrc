@@ -1,3 +1,5 @@
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+
 " Wrap too long lines
 set wrap
 
@@ -89,6 +91,12 @@ autocmd BufReadPost *
 set mouse=a
 set t_Co=256
 colorscheme zenburn
+
+call pathogen#infect()
+
+" Always show the statusline
+set laststatus=2
+let g:Powerline_symbols = 'unicode'
 
 " http://stackoverflow.com/questions/2575545/vim-pipe-selected-text-to-shell-cmd-and-receive-output-on-vim-info-command-line/2585673#2585673
 function Test() range
