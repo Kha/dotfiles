@@ -262,6 +262,10 @@ globalkeys = awful.util.table.join(
             os.execute("(sleep 2 && ~/scripts/compmgr.sh) &")
             awesome.restart()
         end),
+    awful.key({ modkey            }, "c",
+        function ()
+            os.execute("~/scripts/toggle-compmgr.sh")
+        end),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
@@ -380,7 +384,7 @@ awful.rules.rules = {
     { rule = { class = "Pidgin" },
       properties = { tag = tags[screen.count() >= 2 and 2 or 1][3] } },
     { rule = { class = "XTerm" },
-      properties = { opacity = 0.9 } },
+      properties = { opacity = 0.97 } },
 }
 -- }}}
 
