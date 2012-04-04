@@ -99,6 +99,7 @@ set laststatus=2
 let g:Powerline_symbols = 'unicode'
 
 nnoremap <F5> :GundoToggle<CR>
+nnoremap <F3> :NERDTreeToggle<CR>
 
 " http://stackoverflow.com/questions/2575545/vim-pipe-selected-text-to-shell-cmd-and-receive-output-on-vim-info-command-line/2585673#2585673
 function Test() range
