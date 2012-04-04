@@ -3,14 +3,14 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 " Wrap too long lines
 set wrap
 
-" Tabs are 2 characters
+" Tabs are 4 characters
 set tabstop=4
 
-" (Auto)indent uses 2 characters
+" (Auto)indent uses one tab
 set shiftwidth=4
 
 " spaces instead of tabs
-set expandtab
+" set expandtab
 
 " guess indentation
 set autoindent
@@ -97,6 +97,8 @@ call pathogen#infect()
 " Always show the statusline
 set laststatus=2
 let g:Powerline_symbols = 'unicode'
+
+nnoremap <F5> :GundoToggle<CR>
 
 " http://stackoverflow.com/questions/2575545/vim-pipe-selected-text-to-shell-cmd-and-receive-output-on-vim-info-command-line/2585673#2585673
 function Test() range
