@@ -108,3 +108,8 @@ function Test() range
   echo system(lines)
 endfunction
 com -range=% Test :<line1>,<line2>call Test()
+
+" Persistent undo file, awesome when used with Gundo
+" from https://github.com/L-P/dotfiles/blob/master/.vimrc
+set undofile
+set undodir=~/.vim/undo
