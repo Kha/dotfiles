@@ -2,3 +2,13 @@
 
 XTerm*faceName: Inconsolata
 XTerm*faceSize: 13
+
+URxvt.depth: 32
+URxvt.background: [80]#3f3f3f
+URxvt.scrollBar: off
+URxvt.font: xft:inconsolata:size=13
+URxvt.inheritpixmap: true
+URxvt*internalBorder:       false
+URxvt*externalBorder:       false
+URxvt*thickness:            0
+urxvt*borderWidth:          0
