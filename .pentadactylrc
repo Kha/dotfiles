@@ -2,5 +2,8 @@
 
 loadplugins '\.(js|penta)$'
 group user
+highlight StatusLineNormal color: black; background: white
+map <A-j> <C-v>j
+map <A-k> <C-v>k
 
 " vim: set ft=pentadactyl:
