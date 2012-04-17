@@ -113,3 +113,6 @@ com -range=% Test :<line1>,<line2>call Test()
 " from https://github.com/L-P/dotfiles/blob/master/.vimrc
 set undofile
 set undodir=~/.vim/undo
+
+set wildmenu
+set wildmode=list:full
