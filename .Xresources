@@ -2,6 +2,7 @@
 
 XTerm*faceName: Inconsolata
 XTerm*faceSize: 13
+XTerm*BorderWidth: 0
 
 URxvt.depth: 32
 URxvt.background: [80]#3f3f3f
