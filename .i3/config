@@ -28,11 +28,11 @@ bindsym $mod+Shift+space move scratchpad
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 
 # Zenburn Colors
-# class                 border  backgr. text
-client.focused          #525252 #1E1E1E #F5DEB3
-client.focused_inactive #333333 #0F0F0F #E3CCA1
-client.unfocused        #333333 #010101 #85753A
-client.urgent           #856E23 #900000 #F5DEB3
+# class                 border  backgr. text    indicator
+client.focused          #525252 #1E1E1E #F5DEB3 #85753A
+client.focused_inactive #333333 #0F0F0F #E3CCA1 #85753A
+client.unfocused        #333333 #010101 #85753A #85753A
+client.urgent           #856E23 #900000 #F5DEB3 #F5DEB3
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -159,13 +159,15 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+		tray_output primary
+
         colors {
                 background #0F0F0F
                 statusline #F5DEB3
 
-                focused_workspace  #F5DEB3 #666666
-                active_workspace   #F5DEB3 #0F0F0F
-                inactive_workspace #F5DEB3 #1E1E1E
-                urgent_workspace   #ffffff #900000
+                focused_workspace  #85753A #666666 #F5DEB3
+                active_workspace   #85753A #0F0F0F #F5DEB3
+                inactive_workspace #85753A #1E1E1E #F5DEB3
+                urgent_workspace   #85753A #900000 #ffffff
         }
 }
