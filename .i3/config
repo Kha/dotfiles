@@ -20,7 +20,7 @@ bindsym $mod+c exec killall xcompmgr || xcompmgr&
 bindsym $mod+Shift+Left move workspace to output left
 bindsym $mod+Shift+Right move workspace to output right
 
-bindsym $mod+space scratchpad show 
+bindsym $mod+space scratchpad show
 bindsym $mod+Shift+space move scratchpad
 
 
@@ -38,7 +38,7 @@ client.urgent           #856E23 #900000 #F5DEB3
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec xterm
+bindsym $mod+Return exec urxvt
 
 # kill focused window
 bindsym $mod+Shift+q kill
