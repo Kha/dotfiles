@@ -128,3 +128,7 @@ autocmd Syntax * syn match ExtraWhitespace /\s\+$/ containedin=ALL
 let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_GotoError=0
+
+" Haskell Mode
+au Bufenter *.hs compiler ghc
+let g:haddock_browser = "firefox"
