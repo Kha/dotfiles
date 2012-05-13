@@ -117,6 +117,9 @@ set undodir=~/.vim/undo
 set wildmenu
 set wildmode=list:full
 
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+autocmd Syntax * syn match ExtraWhitespace /\s\+$/ containedin=ALL
+
 " Latex Suite
 
 " Starting with Vim 7, the filetype of empty .tex files defaults to
