@@ -333,7 +333,7 @@ if &t_Co > 255
             hi CursorColumn      ctermbg=235   cterm=none
         endif
     else
-        hi Normal ctermfg=188 ctermbg=237
+        hi Normal ctermfg=188
         hi Cursor          ctermbg=109
         hi diffadd         ctermbg=237
         hi diffdelete      ctermbg=238
