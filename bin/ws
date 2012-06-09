@@ -1,0 +1,18 @@
+#! /usr/bin/python
+# usage
+# 'ws new_name' renames the current workspace to 'workspace_num: new_name'
+# 'ws' resets the name to the workspace number
+
+import i3
+import json
+import sys
+
+def quote(s): return '"' + s + '"'
+
+ws = next(ws for ws in i3.get_workspaces() if ws['focused'])
+
+name = str(ws['num'])
+if len(sys.argv) > 1:
+	name += ': ' + sys.argv[1]
+
+i3.rename('workspace', quote(ws['name']), 'to', quote(name))
