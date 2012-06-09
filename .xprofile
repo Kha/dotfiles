@@ -8,7 +8,7 @@ fi
 alias ls='ls --color=auto'
 alias myg++="g++ -Wall -O2 -g -static"
 
-export PATH=$PATH:~/.cabal/bin:/usr/local/texlive/2011/bin/x86_64-linux
+export PATH=$PATH:~/.cabal/bin:/usr/local/texlive/2011/bin/x86_64-linux:~/bin
 export EDITOR=/usr/bin/vim
 export TERM=xterm-256color
 
