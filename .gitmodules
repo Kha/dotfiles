@@ -16,3 +16,6 @@
 [submodule ".vim/bundle/vim-latex"]
 	path = .vim/bundle/vim-latex
 	url = git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex
+[submodule ".vim/bundle/fortune"]
+	path = .vim/bundle/fortune
+	url = https://github.com/hobbestigrou/vimtips-fortune
