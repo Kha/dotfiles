@@ -14,7 +14,7 @@ set $mod Mod4
 # My very own config
 new_window 1pixel
 workspace_auto_back_and_forth yes
-assign [class="Pidgin"] 3
+assign [class="Pidgin"] 3: chat
 bindsym $mod+c exec killall xcompmgr || xcompmgr&
 
 bindsym $mod+Shift+Left move workspace to output left
@@ -97,16 +97,16 @@ bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move workspace 1
-bindsym $mod+Shift+2 move workspace 2
-bindsym $mod+Shift+3 move workspace 3
-bindsym $mod+Shift+4 move workspace 4
-bindsym $mod+Shift+5 move workspace 5
-bindsym $mod+Shift+6 move workspace 6
-bindsym $mod+Shift+7 move workspace 7
-bindsym $mod+Shift+8 move workspace 8
-bindsym $mod+Shift+9 move workspace 9
-bindsym $mod+Shift+0 move workspace 10
+bindsym $mod+Shift+1 move workspace number 1
+bindsym $mod+Shift+2 move workspace number 2
+bindsym $mod+Shift+3 move workspace number 3
+bindsym $mod+Shift+4 move workspace number 4
+bindsym $mod+Shift+5 move workspace number 5
+bindsym $mod+Shift+6 move workspace number 6
+bindsym $mod+Shift+7 move workspace number 7
+bindsym $mod+Shift+8 move workspace number 8
+bindsym $mod+Shift+9 move workspace number 9
+bindsym $mod+Shift+0 move workspace number 10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
