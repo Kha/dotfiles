@@ -38,9 +38,9 @@ client.urgent           #856E23 #900000 #F5DEB3 #F5DEB3
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec ~/.i3/shell
 
-# kill focused window
+#kill focused window
 bindsym $mod+Shift+q kill
 
 bindsym $mod+d exec yeganesh -x | $SHELL
