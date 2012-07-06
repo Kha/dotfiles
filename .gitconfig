@@ -18,3 +18,8 @@
 	st = status -s
 [merge]
 	tool = kdiff3
+[sendemail]
+	smtpencryption = tls
+	smtpserver = smtp.gmail.com
+	smtpuser = derkhabarakh@gmail.com
+	smtpserverport = 587
