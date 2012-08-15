@@ -16,6 +16,7 @@ export EDITOR=/usr/bin/vim
 export TERM=xterm-256color
 
 xrdb -merge ~/.Xresources
+xbindkeys&
 
 dropboxd&
 twmnd&
