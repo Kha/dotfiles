@@ -19,3 +19,6 @@
 [submodule ".vim/bundle/fortune"]
 	path = .vim/bundle/fortune
 	url = https://github.com/hobbestigrou/vimtips-fortune
+[submodule ".vim/bundle/supertab"]
+	path = .vim/bundle/supertab
+	url = https://github.com/ervandew/supertab.git
