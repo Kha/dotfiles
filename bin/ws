@@ -2,6 +2,7 @@
 # usage
 # 'ws new_name' renames the current workspace to 'workspace_num: new_name'
 # 'ws' resets the name to the workspace number
+# dependencies: i3-py ('pip install i3-py')
 
 import i3
 import json
