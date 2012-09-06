@@ -23,7 +23,6 @@ twmnd&
 wicd-gtk -t&
 clipit&
 
-firefox&
 pidgin&
 
 exec i3
