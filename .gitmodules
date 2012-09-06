@@ -19,9 +19,18 @@
 [submodule ".vim/bundle/fortune"]
 	path = .vim/bundle/fortune
 	url = https://github.com/hobbestigrou/vimtips-fortune
+[submodule ".vim/bundle/vim-filetype-haskell"]
+	path = .vim/bundle/vim-filetype-haskell
+	url = https://github.com/kana/vim-filetype-haskell.git
+[submodule "bin/quickcheck-script"]
+	path = bin/quickcheck-script
+	url = https://github.com/hirochachacha/quickcheck-script.rb.git
 [submodule ".vim/bundle/supertab"]
 	path = .vim/bundle/supertab
 	url = https://github.com/ervandew/supertab.git
 [submodule ".vim/bundle/taglist"]
 	path = .vim/bundle/taglist
 	url = https://github.com/vim-scripts/taglist.vim
+[submodule ".vim/bundle/renamer"]
+	path = .vim/bundle/renamer
+	url = https://github.com/vim-scripts/renamer.vim
