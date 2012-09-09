@@ -22,6 +22,7 @@ dropboxd&
 twmnd&
 wicd-gtk -t&
 clipit&
+lightsOn.sh&
 
 pidgin&
 
