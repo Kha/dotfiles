@@ -23,3 +23,7 @@
 	smtpserver = smtp.gmail.com
 	smtpuser = derkhabarakh@gmail.com
 	smtpserverport = 587
+	from = Sebastian Ullrich <sebasti@nullri.ch>
+	envelopesender = Sebastian Ullrich <sebasti@nullri.ch>
+	confirm = always
+	multiedit = true
