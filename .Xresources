@@ -5,7 +5,7 @@ XTerm*faceSize: 13
 XTerm*BorderWidth: 0
 
 URxvt.depth: 32
-URxvt.background: [80]#3f3f3f
+URxvt.background: #3f3f3f
 URxvt.scrollBar: off
 URxvt.font: xft:inconsolata:size=13
 !URxvt.inheritpixmap: true
