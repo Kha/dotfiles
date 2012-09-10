@@ -120,6 +120,9 @@ set wildmode=list:full
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 autocmd Syntax * syn match ExtraWhitespace /\s\+$/ containedin=ALL
 
+highlight Tab ctermbg=black
+autocmd Syntax * syn match Tab /\t/ containedin=ALL
+
 " Latex Suite
 
 " Starting with Vim 7, the filetype of empty .tex files defaults to
