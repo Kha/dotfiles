@@ -1,5 +1,6 @@
-# Specify default video driver (see -vo help for a list).
-vo=xv
+# tear-free hardware acceleration on Intel HD
+vo=vaapi
+va=vaapi
 
 # Start in fullscreen mode by default.
 fs=yes
