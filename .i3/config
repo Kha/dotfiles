@@ -12,6 +12,7 @@ workspace_auto_back_and_forth yes
 workspace 1 output HDMI3
 assign [class="Pidgin"] 3: chat
 exec --no-startup-id i3-msg 'workspace 1; exec firefox'
+exec --no-startup-id zsh -c "urxvt&; sleep 1; i3-msg 'move scratchpad'"
 bindsym $mod+c exec killall xcompmgr || xcompmgr&
 
 bindsym $mod+Shift+Left move workspace to output left
