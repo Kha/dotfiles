@@ -17,6 +17,7 @@ alias du='du -c -h'
 alias mkdir='mkdir -p -v'
 alias ping='ping -c 5'
 alias ..='cd ..'
+alias ssh='TERM=xterm ssh'
 
 # new commands
 alias da='date "+%A, %B %d, %Y [%T]"'
@@ -34,7 +35,9 @@ if [ $UID -ne 0 ]; then
     alias reboot='sudo reboot'
     alias halt='sudo halt'
     alias update='sudo pacman -Su'
-    alias netcfg='sudo netcfg2'
+    alias netcfg='sudo netcfg'
+    alias j='sudo journalctl -n1000'
+    alias systemctl='sudo systemctl'
 fi
 
 # ls
