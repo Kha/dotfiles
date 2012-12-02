@@ -1,7 +1,7 @@
 [core]
 	excludesfile = ~/.gitignore
 [user]
-	email = sebasti@nullrich.de
+	email = sebasti@nullri.ch
 	name = Sebastian Ullrich
 [color]
 	ui = auto
@@ -27,3 +27,5 @@
 	envelopesender = Sebastian Ullrich <sebasti@nullri.ch>
 	confirm = always
 	multiedit = true
+[push]
+	default = simple
