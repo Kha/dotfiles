@@ -122,7 +122,7 @@ set wildmode=list:full
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 autocmd Syntax * syn match ExtraWhitespace /\s\+$/ containedin=ALL
 
-highlight Tab ctermbg=black
+highlight Tab ctermbg=237
 autocmd Syntax * syn match Tab /\t/ containedin=ALL
 
 " Latex Suite
