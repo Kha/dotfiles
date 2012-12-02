@@ -114,6 +114,8 @@ com -range=% Test :<line1>,<line2>call Test()
 set undofile
 set undodir=~/.vim/undo
 
+set directory=~/.vim/swap
+
 set wildmenu
 set wildmode=list:full
 
