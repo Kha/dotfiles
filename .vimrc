@@ -60,7 +60,7 @@ set showcmd
 set showmatch
 
 " write before hiding a buffer
-set autowrite
+set autowriteall
 
 " allows hidden buffers to stay unsaved, but we do not want this, so comment
 " it out:
