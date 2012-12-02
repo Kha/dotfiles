@@ -19,10 +19,11 @@ xrdb -merge ~/.Xresources
 xbindkeys&
 
 dropboxd&
+rescuetime&
 twmnd&
-wicd-gtk -t&
 clipit&
 lightsOn.sh&
+~/.fehbg
 
 pidgin&
 

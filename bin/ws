@@ -1,6 +1,7 @@
 #! /usr/bin/python
 # usage
-# 'ws new_name' renames the current workspace to 'workspace_num: new_name'
+# 'ws new_name' renames the current workspace to 'workspace_num: new_name',
+# 'ws new_num: new_name' to 'new_num: new_name'
 # 'ws' resets the name to the workspace number
 # dependencies: i3-py ('pip install i3-py')
 
@@ -12,8 +13,10 @@ def quote(s): return '"' + s + '"'
 
 ws = next(ws for ws in i3.get_workspaces() if ws['focused'])
 
-name = str(ws['num'])
-if len(sys.argv) > 1:
-	name += ': ' + sys.argv[1]
+name = ' '.join(sys.argv[1:])
+if len(name) == 0:
+	name = str(ws['num'])
+elif not name[0].isdigit():
+	name = str(ws['num']) + ': ' + name
 
 i3.rename('workspace', quote(ws['name']), 'to', quote(name))

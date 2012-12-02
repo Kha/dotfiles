@@ -2,7 +2,9 @@
 vo=vaapi
 va=vaapi
 
+af=scaletempo
 cache=10000
+ass=yes
 
 # Start in fullscreen mode by default.
 fs=yes
