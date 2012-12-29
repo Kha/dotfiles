@@ -13,3 +13,7 @@ URxvt*internalBorder:       false
 URxvt*externalBorder:       false
 URxvt*thickness:            0
 urxvt*borderWidth:          0
+
+URxvt.perl-lib: /home/sebastian/.urxvt/
+URxvt.perl-ext: cwd-spawn
+URxvt.keysym.Mod4-o: perl:cwd-spawn

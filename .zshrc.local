@@ -4,6 +4,8 @@ HISTSIZE=1000
 SAVEHIST=1000
 # End of lines configured by zsh-newuser-install
 
+cwd_to_urxvt # execute upon startup to set initial directory
+
 pdf() { evince $1 &> /dev/null&; }
 
 # https://wiki.archlinux.org/index.php/Bash#Aliases
