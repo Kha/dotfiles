@@ -31,3 +31,9 @@
 [submodule ".vim/bundle/renamer"]
 	path = .vim/bundle/renamer
 	url = https://github.com/vim-scripts/renamer.vim
+[submodule ".vim/bundle/vimpager"]
+	path = .vim/bundle/vimpager
+	url = https://github.com/rkitover/vimpager.git
+[submodule ".vim/bundle/pydoc"]
+	path = .vim/bundle/pydoc
+	url = https://github.com/fs111/pydoc.vim
