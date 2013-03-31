@@ -1,4 +1,41 @@
-runtime bundle/vim-pathogen/autoload/pathogen.vim
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+" Awesome git integration
+Bundle 'tpope/vim-fugitive'
+" Awesome undotree navigation
+Bundle 'sjl/gundo.vim'
+" Awesome file system navigation
+Bundle 'scrooloose/nerdtree'
+" Awesome pydoc on K
+Bundle 'fs111/pydoc.vim'
+" Awesome mass file renaming
+Bundle 'vim-scripts/renamer.vim'
+" Awesome tag navigation
+Bundle 'vim-scripts/taglist.vim'
+" Awesome latex integration
+Bundle 'jcf/vim-latex'
+" Awesomer less replacement
+Bundle 'rkitover/vimpager'
+" Awesome fancy status line
+Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
+" Awesome gpg integration
+Bundle 'https://git.gitorious.org/vim-gnupg/vim-gnupg.git'
+" Awesome coffeescript syntax file
+Bundle 'kchmck/vim-coffee-script'
+" Awesome git status in your vim gutter
+Bundle 'airblade/vim-gitgutter'
+" Semantic completion. Awesome!
+Bundle 'Valloric/YouCompleteMe'
+" Awesome error output for YCM
+Bundle 'scrooloose/syntastic'
+
+filetype plugin indent on
 
 " Wrap too long lines
 set wrap
@@ -91,8 +128,6 @@ autocmd BufReadPost *
 set mouse=a
 set t_Co=256
 colorscheme zenburn
-
-call pathogen#infect()
 
 " Always show the statusline
 set laststatus=2
