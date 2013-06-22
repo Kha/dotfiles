@@ -1,0 +1,19 @@
+#! /bin/bash
+# SIGSTOP/CONT process and children of active window
+
+set -e
+
+pid=$(xdotool getactivewindow getwindowpid)
+
+if [ $(ps -p $pid -o s=) != "T" ]; then
+	kill -SIGSTOP $pid
+	# death to all children!
+	for chld in $(ps --ppid $pid -o pid=); do
+		kill -SIGSTOP $chld
+	done
+else
+	for chld in $(ps --ppid $pid -o pid=); do
+		kill -SIGCONT $chld
+	done
+	kill -SIGCONT $pid
+fi

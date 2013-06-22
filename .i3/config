@@ -17,6 +17,7 @@ for_window [class="^Steam$"] floating enable
 exec --no-startup-id i3-msg 'workspace 1; exec firefox'
 exec --no-startup-id urxvt -name scratch
 bindsym $mod+q exec --no-startup-id quickswitch.py
+bindsym $mod+z exec --no-startup-id stop-cont-active
 
 bindsym $mod+Shift+Left move workspace to output left
 bindsym $mod+Shift+Right move workspace to output right
@@ -86,7 +87,7 @@ bindsym $mod+minus focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-bindsym $mod+z focus child
+#bindsym $mod+z focus child
 
 # switch to workspace
 bindsym $mod+1 workspace number 1
