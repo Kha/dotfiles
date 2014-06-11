@@ -1,5 +1,7 @@
 filetype off
 
+let mapleader = "\<Space>"
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -17,13 +19,14 @@ Bundle 'fs111/pydoc.vim'
 " Awesome mass file renaming
 Bundle 'vim-scripts/renamer.vim'
 " Awesome tag navigation
-Bundle 'vim-scripts/taglist.vim'
+Bundle 'majutsushi/tagbar'
 " Awesome latex integration
 Bundle 'jcf/vim-latex'
 " Awesomer less replacement
 Bundle 'rkitover/vimpager'
 " Awesome fancy status line
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
+"Bundle 'bling/vim-airline'
 " Awesome gpg integration
 Bundle 'https://git.gitorious.org/vim-gnupg/vim-gnupg.git'
 " Awesome coffeescript syntax file
@@ -34,20 +37,30 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'Valloric/YouCompleteMe'
 " Awesome error output for YCM
 Bundle 'scrooloose/syntastic'
+" Awesome function argument moving
+Bundle 'PeterRincker/vim-argumentative'
+Bundle 'klen/python-mode'
+let g:pymode_lint = 0
+let g:pymode_rope_completion = 0
+let g:pymode_rope_goto_definition_cmd = 'e'
+Bundle 'kien/ctrlp.vim'
+map <C-B> :CtrlPBuffer<CR>
+Bundle 'jlanzarotta/bufexplorer'
+
 
 filetype plugin indent on
 
 " Wrap too long lines
 set wrap
 
-" Tabs are 4 characters
-set tabstop=4
+" Tabs are 2 characters
+set tabstop=2
 
 " (Auto)indent uses one tab
-set shiftwidth=4
+set shiftwidth=2
 
 " spaces instead of tabs
-" set expandtab
+set expandtab
 
 " guess indentation
 set autoindent
@@ -97,11 +110,11 @@ set showcmd
 set showmatch
 
 " write before hiding a buffer
-set autowriteall
+set autowrite
 
 " allows hidden buffers to stay unsaved, but we do not want this, so comment
 " it out:
-"set hidden
+set hidden
 
 "set wmh=0
 
@@ -115,7 +128,7 @@ syntax on
 set bg=dark
 
 " Always show the menu, insert longest match
-set completeopt=menuone,longest
+set completeopt=menuone,preview
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
@@ -127,11 +140,12 @@ autocmd BufReadPost *
 
 set mouse=a
 set t_Co=256
-colorscheme zenburn
+colorscheme desert
 
 " Always show the statusline
 set laststatus=2
-let g:Powerline_symbols = 'unicode'
+let g:Powerline_symbols = 'fancy'
+let g:airline_powerline_fonts = 1
 
 nnoremap <F5> :GundoToggle<CR>
 nnoremap <F3> :NERDTreeToggle<CR>
@@ -170,3 +184,36 @@ let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_GotoError=0
 let g:Imap_UsePlaceHolders=0
+
+" Use vim as pager
+let $PAGER=''
+
+" Close buffer without closing its window
+" http://stackoverflow.com/a/5179609/161659
+nmap <leader>bc :bprevious<CR>:bdelete #<CR>
+
+set scrolloff=5
+
+"let g:ycm_key_invoke_completion = '<C-K>'
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+
+let g:tagbar_type_scala = {
+    \ 'ctagstype' : 'Scala',
+    \ 'kinds'     : [
+        \ 'p:packages:1',
+        \ 'V:values',
+        \ 'v:variables',
+        \ 'T:types',
+        \ 't:traits',
+        \ 'o:objects',
+        \ 'a:aclasses',
+        \ 'c:classes',
+        \ 'r:cclasses',
+        \ 'm:methods'
+    \ ]
+\ }
+
+nnoremap L i<CR><Esc>k$
+nnoremap <Leader>w :w<CR>
+
+source /usr/share/vim/plugin/ropevim.vim
