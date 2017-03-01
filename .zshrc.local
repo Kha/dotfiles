@@ -16,7 +16,7 @@ foreground-current-job() { fg; }
 zle -N foreground-current-job
 bindkey -M emacs '^z' foreground-current-job
 
-cwd_to_urxvt # execute upon startup to set initial directory
+#cwd_to_urxvt # execute upon startup to set initial directory
 
 pdf() { evince $1 &> /dev/null&! }
 
@@ -24,8 +24,6 @@ pdf() { evince $1 &> /dev/null&! }
 
 zstyle ':completion:*' hosts fsmi-login fsmi-www-test fsmi-db atis nas
 # https://wiki.archlinux.org/index.php/Bash#Aliases
-
-alias ssh='TERM=xterm ssh'
 
 # modified commands
 alias grep='grep --color=auto'
@@ -47,3 +45,16 @@ if [ $UID -ne 0 ]; then
     alias netcfg='sudo netcfg'
     alias sys='sudo systemctl'
 fi
+
+zbell() {
+  print -n "\a"
+}
+add-zsh-hook precmd zbell
+
+#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+source /usr/share/fzf/key-bindings.zsh
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_OPTS="--exact"
+
+export SRCDEST=~/.cache/pacaur/src
