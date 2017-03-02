@@ -16,8 +16,9 @@
 	sudopull = !git stash && git pull && git stash pop
 	sudopupu = !git stash && git pull && git stash pop && git push
 	st = status -s
+  reco = rebase --continue
 [merge]
-	tool = kdiff3
+  conflictStyle = diff3
 [sendemail]
 	smtpencryption = tls
 	smtpserver = smtp.gmail.com
@@ -29,3 +30,5 @@
 	multiedit = true
 [push]
 	default = simple
+[pull]
+  rebase = true
