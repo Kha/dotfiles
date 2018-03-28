@@ -46,15 +46,16 @@ if [ $UID -ne 0 ]; then
     alias sys='sudo systemctl'
 fi
 
-zbell() {
-  print -n "\a"
-}
-add-zsh-hook precmd zbell
+#zbell() {
+#  print -n "\a"
+#}
+#add-zsh-hook precmd zbell
 
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-source /usr/share/fzf/key-bindings.zsh
+source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_DEFAULT_OPTS="--exact"
 
 export SRCDEST=~/.cache/pacaur/src
+export PATH=$PATH:$HOME/lean/bin

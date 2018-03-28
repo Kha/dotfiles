@@ -216,4 +216,4 @@ let g:tagbar_type_scala = {
 nnoremap L i<CR><Esc>k$
 nnoremap <Leader>w :w<CR>
 
-source /usr/share/vim/plugin/ropevim.vim
+"source /usr/share/vim/plugin/ropevim.vim
