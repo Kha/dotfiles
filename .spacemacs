@@ -31,8 +31,6 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     csv
-     haskell
      javascript
      typescript
      yaml
@@ -43,6 +41,7 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     helm
      auto-completion
      better-defaults
      (c-c++ :variables
@@ -70,11 +69,11 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(lean-mode company-lean helm-lean package-lint)
+   dotspacemacs-additional-packages '() ;lean-mode company-lean helm-lean)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
-   ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '(smartparens)
+   ;; A list of packages that will not be installed and loaded.
+   dotspacemacs-excluded-packages '()
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -99,14 +98,14 @@ values."
    ;; This variable has no effect if Emacs is launched with the parameter
    ;; `--insecure' which forces the value of this variable to nil.
    ;; (default t)
-   dotspacemacs-elpa-https nil
+   dotspacemacs-elpa-https t
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    dotspacemacs-elpa-timeout 5
    ;; If non nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
    ;; whenever you start Emacs. (default nil)
-   dotspacemacs-check-for-update t
+   dotspacemacs-check-for-update nil
    ;; If non-nil, a form that evaluates to a package directory. For example, to
    ;; use different package directories for different Emacs versions, set this
    ;; to `emacs-version'.
@@ -146,9 +145,9 @@ values."
                          solarized-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
-   ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
-   ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
+   ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
+   ;; quickly tweak the mode-line size to make separators look not too crappy.
+   dotspacemacs-default-font '("Iosevka" ;"Source Code Pro"
                                :size 15
                                :weight normal
                                :width normal
@@ -332,10 +331,27 @@ you should place your code here."
   (spacemacs|define-jump-handlers lean-mode (lean-find-definition :async t))
 
   (setq create-lockfiles nil)
+
+  (add-to-load-path "~/projects/lean/lean-mode")
+  (require 'lean-mode)
+  (require 'company-lean)
+  (require 'helm-lean)
+
+  (add-to-load-path "~/projects/lean/lean/lean4-mode")
+  (require 'lean4-mode)
+
   (push 'lean-mode spacemacs-indent-sensitive-modes)
+  (push 'lean4-mode spacemacs-indent-sensitive-modes)
 
   (global-set-key (kbd "C-SPC") #'company-complete)
   (define-key evil-normal-state-map (kbd "C-b") 'helm-mini)
+
+  ;; https://github.com/syl20bnr/spacemacs/issues/6871
+  (defun term-send-esc ()
+    "Send ESC in term mode."
+    (interactive)
+    (term-send-raw-string "\e"))
+  (evil-define-key 'insert term-raw-map (kbd "C-c C-e") 'term-send-esc)
 
   (defun evil-visual-update-x-selection (&optional buffer)
     "Update the X selection with the current visual region."
@@ -350,10 +366,19 @@ you should place your code here."
                                    evil-visual-end))
         (setq x-last-selected-text-primary nil))))
 
-  ;;(setq-default rust-enable-racer t)
-  ;;(setq company-racer-executable "/home/sebastian/lib/racer/target/release/racer")
+  ;; Use literal C-r in terminal
+  (defun bb/setup-term-mode ()
+    (evil-local-set-key 'insert (kbd "C-r") 'bb/send-C-r))
 
-  ;(require 'lean-mode)
+  (defun bb/send-C-r ()
+    (interactive)
+    (term-send-raw-string "\C-r"))
+
+  (add-hook 'term-mode-hook 'bb/setup-term-mode)
+
+  (global-set-key (kbd "C-SPC") #'company-complete)
+
+  (spacemacs|define-jump-handlers lean-mode (lean-find-definition :async t))
 
   ;; Make the file list creation faster by NOT calling `projectile-get-sub-projects-files'
   (defun modi/advice-projectile-no-sub-project-files ()
@@ -363,6 +388,11 @@ you should place your code here."
   (advice-add 'projectile-get-repo-files :override #'modi/advice-projectile-no-sub-project-files)
 
   (evil-set-command-property 'spacemacs/evil-smart-goto-definition :jump t)
+
+  (sp-local-pair 'lean4-mode "/-" "-/")
+  (sp-local-pair 'lean4-mode "`'" nil :actions :rem)
+  (sp-local-pair 'lean4-mode "⟨" "⟩")
+  (sp-local-pair 'lean4-mode "«" "»")
 
   (setq-default TeX-master nil)
   (setq latex-enable-auto-fill nil)
@@ -395,19 +425,22 @@ you should place your code here."
    [default default default italic underline success warning error])
  '(c-basic-offset 4)
  '(default-input-method "Lean")
+ '(evil-shift-round nil)
  '(evil-want-Y-yank-to-eol nil)
- '(fill-column 160)
  '(flycheck-pos-tip-timeout 10)
  '(flycheck-rust-cargo-executable "/home/sebastian/.cargo/bin/cargo")
  '(git-commit-summary-max-length 999)
  '(hl-sexp-background-color "#efebe9")
- '(lean-memory-limit 4192)
- '(lean-server-check-mode (quote visible-files))
+ '(lean-keybinding-auto-complete [67108896])
+ '(lean-next-error-mode nil)
+ '(lean-show-rule-column-method (quote vline))
  '(package-selected-packages
    (quote
-    (bind-key avy bind-map idris-mode prop-menu unicode-fonts web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode tide typescript-mode yaml-mode powerline spinner dumb-jump anzu iedit highlight async graphviz-dot-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data hide-comnt yapfify py-isort org-projectile org mwim live-py-mode gitignore-mode github-search fringe-helper git-gutter+ gh marshal logito pcache ht flyspell-correct-helm flyspell-correct seq pos-tip magit-popup git-commit deferred cargo rust-mode yasnippet packed pythonic helm-flyspell auto-dictionary company-auctex auctex-latexmk auctex magit persp-mode org-plus-contrib leuven-theme hindent helm-c-yasnippet google-translate evil-matchit diff-hl company-quickhelp auto-complete anaconda-mode smartparens ycmd request flycheck haskell-mode git-gutter company projectile helm helm-core markdown-mode alert with-editor hydra evil zenburn-theme xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree toml-mode toc-org stickyfunc-enhance srefactor spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle shm shell-pop restart-emacs request-deferred rainbow-delimiters racer quelpa pyvenv pytest pyenv-mode py-yapf popwin pkg-info pip-requirements pcre2el paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-download org-bullets open-junk-file neotree multi-term move-text monokai-theme mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lua-mode lorem-ipsum log4e linum-relative link-hint info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-hoogle helm-gitignore helm-flx helm-descbinds helm-company helm-ag haskell-snippets goto-chg golden-ratio gnuplot gntp github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist gh-md flycheck-ycmd flycheck-rust flycheck-pos-tip flycheck-haskell flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help epresent elisp-slime-nav disaster define-word dash-functional cython-mode company-ycmd company-statistics company-racer company-ghc company-cabal company-c-headers company-anaconda column-enforce-mode cmm-mode cmake-mode clean-aindent-mode clang-format buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (powershell epl org-mime intero hlint-refactor company-ghci ghc ghub helm-lean company-lean lean-mode org-category-capture diminish let-alist s origami f winum unfill fuzzy bind-key avy bind-map idris-mode prop-menu unicode-fonts web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode tide typescript-mode yaml-mode powerline spinner dumb-jump anzu iedit highlight async graphviz-dot-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data hide-comnt yapfify py-isort org-projectile org mwim live-py-mode gitignore-mode github-search fringe-helper git-gutter+ gh marshal logito pcache ht flyspell-correct-helm flyspell-correct seq pos-tip magit-popup git-commit deferred cargo rust-mode yasnippet packed pythonic helm-flyspell auto-dictionary company-auctex auctex-latexmk auctex magit persp-mode org-plus-contrib leuven-theme hindent helm-c-yasnippet google-translate evil-matchit diff-hl company-quickhelp auto-complete anaconda-mode smartparens ycmd request flycheck haskell-mode git-gutter company projectile helm helm-core markdown-mode alert with-editor hydra evil zenburn-theme xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree toml-mode toc-org stickyfunc-enhance srefactor spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle shm shell-pop restart-emacs request-deferred rainbow-delimiters racer quelpa pyvenv pytest pyenv-mode py-yapf popwin pkg-info pip-requirements pcre2el paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-download org-bullets open-junk-file neotree multi-term move-text monokai-theme mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lua-mode lorem-ipsum log4e linum-relative link-hint info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-hoogle helm-gitignore helm-flx helm-descbinds helm-company helm-ag haskell-snippets goto-chg golden-ratio gnuplot gntp github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist gh-md flycheck-ycmd flycheck-rust flycheck-pos-tip flycheck-haskell flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help epresent elisp-slime-nav disaster define-word dash-functional cython-mode company-ycmd company-statistics company-racer company-ghc company-cabal company-c-headers company-anaconda column-enforce-mode cmm-mode cmake-mode clean-aindent-mode clang-format buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(paradox-github-token t)
- '(racer-rust-src-path "/home/sebastian/projects/rust/src"))
+ '(racer-rust-src-path "/home/sebastian/projects/rust/src")
+ '(split-height-threshold nil)
+ '(split-width-threshold nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
