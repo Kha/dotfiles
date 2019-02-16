@@ -312,6 +312,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (setq syntax-checking-enable-tooltips nil)
   )
 
 (defun dotspacemacs/user-config ()
@@ -399,7 +400,6 @@ you should place your code here."
     (term-send-raw-string "\C-r"))
   (add-hook 'term-mode-hook 'bb/setup-term-mode)
 
-  (setq syntax-checking-enable-tooltips nil)
   (setq popwin:special-display-config (cl-delete "^\\*Flycheck.+\\*$" popwin:special-display-config :key #'car :test #'equal))
 
   (defun advice-flycheck-flush-multiline-message (msg)
@@ -422,6 +422,7 @@ you should place your code here."
  '(default-input-method "Lean")
  '(evil-shift-round nil)
  '(evil-want-Y-yank-to-eol nil)
+ '(fill-nobreak-predicate (quote (texmathp)))
  '(flycheck-pos-tip-timeout 10)
  '(flycheck-rust-cargo-executable "/home/sebastian/.cargo/bin/cargo")
  '(git-commit-summary-max-length 999)
@@ -436,6 +437,7 @@ you should place your code here."
     (parent-mode helm-cscope fuzzy flx treepy graphql diminish popup crux winum unfill package-lint origami org-category-capture org-mime intero helm-lean csv-mode ghc lean-mode epl f s ghub xcscope bind-key avy bind-map idris-mode prop-menu unicode-fonts web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode tide typescript-mode yaml-mode powerline spinner dumb-jump anzu iedit highlight async graphviz-dot-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data hide-comnt yapfify py-isort org-projectile org mwim live-py-mode gitignore-mode github-search fringe-helper git-gutter+ gh marshal logito pcache ht flyspell-correct-helm flyspell-correct seq pos-tip magit-popup git-commit deferred cargo rust-mode yasnippet packed pythonic helm-flyspell auto-dictionary company-auctex auctex-latexmk auctex magit persp-mode org-plus-contrib leuven-theme hindent helm-c-yasnippet google-translate evil-matchit diff-hl company-quickhelp auto-complete anaconda-mode smartparens ycmd request flycheck haskell-mode git-gutter company projectile helm helm-core markdown-mode alert with-editor hydra evil zenburn-theme xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree toml-mode toc-org stickyfunc-enhance srefactor spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle shm shell-pop restart-emacs request-deferred rainbow-delimiters racer quelpa pyvenv pytest pyenv-mode py-yapf popwin pkg-info pip-requirements pcre2el paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-download org-bullets open-junk-file neotree multi-term move-text monokai-theme mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lua-mode lorem-ipsum log4e linum-relative link-hint info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-hoogle helm-gitignore helm-flx helm-descbinds helm-company helm-ag haskell-snippets goto-chg golden-ratio gnuplot gntp github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist gh-md flycheck-ycmd flycheck-rust flycheck-pos-tip flycheck-haskell flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help epresent elisp-slime-nav disaster define-word dash-functional cython-mode company-ycmd company-statistics company-racer company-ghc company-cabal company-c-headers company-anaconda column-enforce-mode cmm-mode cmake-mode clean-aindent-mode clang-format buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(paradox-github-token t)
  '(racer-rust-src-path "/home/sebastian/projects/rust/src")
+ '(shell-pop-autocd-to-working-dir nil)
  '(split-height-threshold nil)
  '(split-width-threshold nil))
 (custom-set-faces
