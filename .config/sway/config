@@ -209,6 +209,12 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+bindsym XF86AudioRaiseVolume exec amixer set Master playback 5%+; killall -USR1 i3status
+bindsym XF86AudioLowerVolume exec amixer set Master playback 5%-; killall -USR1 i3status
+bindsym XF86AudioMute exec amixer set Master toggle; killall -USR1 i3status
+bindsym XF86MonBrightnessDown exec light -U 5
+bindsym XF86MonBrightnessUp exec light -A 5
+
 #
 # Status Bar:
 #
