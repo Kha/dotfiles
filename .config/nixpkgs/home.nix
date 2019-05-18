@@ -11,7 +11,7 @@
     # editing
     emacs ispell vim_configurable
     # dev
-    gitAndTools.tig elan
+    jetbrains.clion elan gitAndTools.tig python3
     # other desktop apps
     firefox chromium evince
     # other cli apps
@@ -36,6 +36,12 @@
       enable = true;
       plugins = [ "fasd" "per-directory-history" ];
       theme = "agnoster";
+    };
+    sessionVariables = {
+      # hide user in shell prompt
+      DEFAULT_USER = "sebastian";
+      # fix Java programs on sway
+      _JAVA_AWT_WM_NONREPARENTING = 1;
     };
     shellAliases = {
       ls = "exa";
