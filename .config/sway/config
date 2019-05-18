@@ -22,8 +22,8 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec
 default_border pixel 1
 workspace_auto_back_and_forth yes
 
-exec $term --name=scratch
-for_window [instance="^scratch$"] move to scratchpad
+exec $term --class=scratch
+for_window [class="^scratch$"] move to scratchpad
 
 ### Output configuration
 #

@@ -40,6 +40,8 @@
     sessionVariables = {
       # hide user in shell prompt
       DEFAULT_USER = "sebastian";
+      # disable default rprompt...?
+      RPROMPT = "";
       # fix Java programs on sway
       _JAVA_AWT_WM_NONREPARENTING = 1;
     };
@@ -47,6 +49,10 @@
       ls = "exa";
       ssh = "TERM=xterm-256color ssh";
     };
+    initExtra = ''
+      # https://github.com/NixOS/nixpkgs/issues/30121
+      setopt prompt_sp
+    '';
   };
 
   # Let Home Manager install and manage itself.
