@@ -11,7 +11,7 @@
     # editing
     emacs ispell vim_configurable
     # dev
-    jetbrains.clion elan gitAndTools.tig python3
+    jetbrains.clion elan gitAndTools.hub gitAndTools.tig python3
     # other desktop apps
     firefox chromium evince
     # other cli apps
