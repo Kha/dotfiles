@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     # window manager
-    sway i3status
+    sway xwayland i3status mako
     # system
     pavucontrol
     # fonts!
@@ -23,6 +23,9 @@
   programs.direnv.enable = true;
   programs.fzf.enable = true;
   programs.git.enable = true;
+
+  gtk.enable = true;
+  fonts.fontconfig.enableProfileFonts = true;
 
   # on second thought, just use spacemacs
   #programs.emacs = {
@@ -44,6 +47,8 @@
       RPROMPT = "";
       # fix Java programs on sway
       _JAVA_AWT_WM_NONREPARENTING = 1;
+      # fix locales for Nix on Ubuntu
+      LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     };
     shellAliases = {
       ls = "exa";

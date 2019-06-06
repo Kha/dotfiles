@@ -473,13 +473,13 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (setq create-lockfiles nil)
 
-  (add-to-load-path "~/projects/lean/lean-mode")
+  (add-to-load-path "~/lean/lean-mode")
   (require 'lean-mode)
   (require 'company-lean)
   (require 'helm-lean)
   (spacemacs|define-jump-handlers lean-mode (lean-find-definition :async t))
 
-  (add-to-load-path "~/projects/lean/lean/lean4-mode")
+  (add-to-load-path "~/lean/lean/lean4-mode")
   (require 'lean4-mode)
 
   (push 'lean-mode spacemacs-indent-sensitive-modes)
@@ -574,7 +574,7 @@ before packages are loaded."
  '(lean-next-error-mode nil)
  '(lean-server-check-mode (quote visible-files))
  '(lean-show-rule-column-method (quote vline))
- '(lean4-rootdir "/home/sebastian/projects/lean/lean")
+ '(lean4-rootdir "/home/sebastian/lean/lean")
  '(package-selected-packages
    (quote
     (nix-mode helm-nixos-options company-nixos-options nixos-options csv-mode parent-mode flx popup racket-mode faceup helm-cscope xcscope powershell epl org-mime intero hlint-refactor company-ghci ghc ghub helm-lean company-lean lean-mode org-category-capture diminish let-alist s origami f winum unfill fuzzy bind-key avy bind-map idris-mode prop-menu unicode-fonts web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode tide typescript-mode yaml-mode powerline spinner dumb-jump anzu iedit highlight async graphviz-dot-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data hide-comnt yapfify py-isort org-projectile org mwim live-py-mode gitignore-mode github-search fringe-helper git-gutter+ gh marshal logito pcache ht flyspell-correct-helm flyspell-correct seq pos-tip magit-popup git-commit deferred cargo rust-mode yasnippet packed pythonic helm-flyspell auto-dictionary company-auctex auctex-latexmk auctex magit persp-mode org-plus-contrib leuven-theme hindent helm-c-yasnippet google-translate evil-matchit diff-hl company-quickhelp auto-complete anaconda-mode smartparens ycmd request flycheck haskell-mode git-gutter company projectile helm helm-core markdown-mode alert with-editor hydra evil zenburn-theme xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree toml-mode toc-org stickyfunc-enhance srefactor spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle shm shell-pop restart-emacs request-deferred rainbow-delimiters racer quelpa pyvenv pytest pyenv-mode py-yapf popwin pkg-info pip-requirements pcre2el paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-download org-bullets open-junk-file neotree multi-term move-text monokai-theme mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lua-mode lorem-ipsum log4e linum-relative link-hint info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-hoogle helm-gitignore helm-flx helm-descbinds helm-company helm-ag haskell-snippets goto-chg golden-ratio gnuplot gntp github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist gh-md flycheck-ycmd flycheck-rust flycheck-pos-tip flycheck-haskell flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help epresent elisp-slime-nav disaster define-word dash-functional cython-mode company-ycmd company-statistics company-racer company-ghc company-cabal company-c-headers company-anaconda column-enforce-mode cmm-mode cmake-mode clean-aindent-mode clang-format buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
