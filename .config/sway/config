@@ -22,6 +22,7 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec
 default_border pixel 1
 workspace_auto_back_and_forth yes
 
+exec mako
 exec $term --class=scratch
 for_window [class="^scratch$"] move to scratchpad
 
@@ -36,15 +37,20 @@ for_window [class="^scratch$"] move to scratchpad
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
+output 'Goldstar Company Ltd W2242 0x0000E431' pos 0,0
+output 'Fujitsu Siemens Computers GmbH P27-8 TS Pro YVAQ010117' pos 1680,0
+
 ### Idle configuration
 #
 # Example configuration:
 #
 exec swayidle -w \
               resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
-         #timeout 600 'swaylock -f -c 000000' \
-         #timeout 600 'swaymsg "output * dpms off"' \
+         before-sleep 'swaylock -f -c 000000' \
+         timeout 600 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * dpms off"'
+
+bindsym $mod+n exec swaylock -f -c 000000
 
 ### Input configuration
 #
@@ -63,7 +69,7 @@ exec swayidle -w \
 input * {
   xkb_layout us,de
   xkb_variant altgr-intl,nodeadkeys
-  xkb_options terminate:ctrl_alt_bksp,caps:escape
+  xkb_options caps:escape
 
   tap enabled
 }
@@ -115,11 +121,11 @@ input 2:10:TPPS/2_IBM_TrackPoint pointer_accel 0.6
     bindsym $mod+Shift+$down move down
     bindsym $mod+Shift+$up move up
     bindsym $mod+Shift+$right move right
-    # ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
+
+    bindsym $mod+Shift+Left move workspace to output left
+    bindsym $mod+Shift+Down move workspace to output down
+    bindsym $mod+Shift+Up move workspace to output up
+    bindsym $mod+Shift+Right move workspace to output right
 #
 # Workspaces:
 #
