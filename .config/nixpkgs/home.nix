@@ -55,6 +55,7 @@
       ssh = "TERM=xterm-256color ssh";
     };
     initExtra = ''
+      export PATH=$PATH:bin
       # https://github.com/NixOS/nixpkgs/issues/30121
       setopt prompt_sp
     '';
