@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
-{
+let
+  lorri-src = builtins.fetchGit { url = https://github.com/target/lorri.git; rev = "8224dfb57e508ec87d38a4ce7b9ce27bbf7c2a81"; };
+  lorri = import lorri-src { src = lorri-src; };
+in {
   home.packages = with pkgs; [
     # window manager
     sway xwayland i3status mako
@@ -11,7 +14,7 @@
     # editing
     emacs ispell vim_configurable
     # dev
-    jetbrains.clion elan gitAndTools.hub gitAndTools.tig python3
+    jetbrains.clion elan gitAndTools.hub gitAndTools.tig python3 lorri
     # other desktop apps
     firefox chromium evince
     # other cli apps
