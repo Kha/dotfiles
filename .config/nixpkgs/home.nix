@@ -8,7 +8,7 @@ in {
     # window manager
     sway xwayland i3status mako
     # system
-    pavucontrol
+    pavucontrol xdg_utils
     # fonts!
     iosevka-ss09
     # editing
@@ -52,6 +52,7 @@ in {
       _JAVA_AWT_WM_NONREPARENTING = 1;
       # fix locales for Nix on Ubuntu
       LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
+      XDG_DATA_DIRS = "$XDG_DATA_DIRS:$HOME/.nix-profile/share";
     };
     shellAliases = {
       ls = "exa";
