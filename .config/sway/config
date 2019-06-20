@@ -19,7 +19,7 @@ set $term alacritty
 # Note: it's recommended that you pass the final command to sway
 set $menu dmenu_path | dmenu | xargs swaymsg exec
 
-default_border pixel 1
+default_border none
 workspace_auto_back_and_forth yes
 
 exec mako
@@ -74,7 +74,7 @@ input * {
   tap enabled
 }
 
-input 2:10:TPPS/2_IBM_TrackPoint pointer_accel 0.6
+input 2:10:TPPS/2_IBM_TrackPoint pointer_accel 0.4
 
 ### Key bindings
 #
