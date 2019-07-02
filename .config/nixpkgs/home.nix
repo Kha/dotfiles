@@ -6,7 +6,7 @@ let
 in {
   home.packages = with pkgs; [
     # window manager
-    sway xwayland i3status mako
+    sway xwayland i3status mako grim slurp wl-clipboard
     # system
     pavucontrol xdg_utils
     # fonts!
