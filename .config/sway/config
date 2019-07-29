@@ -74,7 +74,7 @@ input * {
   tap enabled
 }
 
-input 2:10:TPPS/2_IBM_TrackPoint pointer_accel 0.4
+input 2:10:TPPS/2_IBM_TrackPoint pointer_accel 0.2
 
 ### Key bindings
 #

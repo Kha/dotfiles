@@ -18,7 +18,7 @@ in {
     # other desktop apps
     firefox chromium evince
     # other cli apps
-    fasd htop
+    fasd htop mpv file python3Packages.howdoi
     # Rust all the things
     alacritty exa fd ripgrep
   ];
