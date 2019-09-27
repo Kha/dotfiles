@@ -44,6 +44,8 @@ in {
       theme = "agnoster";
     };
     sessionVariables = {
+      # vim is the default editor
+      EDITOR = "vim";
       # hide user in shell prompt
       DEFAULT_USER = "sebastian";
       # disable default rprompt...?
