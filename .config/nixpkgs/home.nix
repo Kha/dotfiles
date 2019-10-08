@@ -8,7 +8,7 @@ in {
     # window manager
     sway xwayland i3status mako grim slurp wl-clipboard
     # system
-    pavucontrol xdg_utils
+    pavucontrol xdg_utils gnome3.adwaita-icon-theme
     # fonts!
     iosevka-ss09
     # editing
