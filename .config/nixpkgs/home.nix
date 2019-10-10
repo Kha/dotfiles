@@ -35,7 +35,8 @@ in {
   programs.git.enable = true;
 
   gtk.enable = true;
-  fonts.fontconfig.enableProfileFonts = true;
+  fonts.fontconfig.enable = true;
+  xdg.mimeApps.enable = true;
 
   # on second thought, just use spacemacs
   #programs.emacs = {
@@ -45,6 +46,7 @@ in {
 
   programs.zsh = {
     enable = true;
+    enableCompletion = true;
     oh-my-zsh = {
       enable = true;
       plugins = [ "fasd" "per-directory-history" ];
@@ -76,4 +78,6 @@ in {
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  home.stateVersion = "18.09";
 }
