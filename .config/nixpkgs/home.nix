@@ -3,6 +3,13 @@
 let
   lorri-src = builtins.fetchGit { url = https://github.com/target/lorri.git; rev = "8224dfb57e508ec87d38a4ce7b9ce27bbf7c2a81"; };
   lorri = import lorri-src { src = lorri-src; };
+  xdg_utils = pkgs.xdg_utils.overrideAttrs (attrs: {
+    postInstall = attrs.postInstall + ''
+      sed  '3s#.#\
+      mimetype() { false; }\
+      &#' -i "$out"/bin/*
+    '' + attrs.postInstall;
+  });
 in {
   home.packages = with pkgs; [
     # window manager
@@ -16,7 +23,7 @@ in {
     # dev
     jetbrains.clion elan gitAndTools.hub gitAndTools.tig python3Packages.ipython lorri
     # other desktop apps
-    firefox chromium evince
+    firefox evince
     # other cli apps
     fasd htop mpv file python3Packages.howdoi
     # Rust all the things
