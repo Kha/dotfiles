@@ -36,7 +36,12 @@ in {
 
   gtk.enable = true;
   fonts.fontconfig.enable = true;
-  xdg.mimeApps.enable = true;
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "application/pdf" = [ "org.gnome.Evince.desktop" ];
+    };
+  };
 
   # on second thought, just use spacemacs
   #programs.emacs = {
