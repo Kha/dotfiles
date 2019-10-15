@@ -1,35 +1,12 @@
-[core]
-	excludesfile = ~/.gitignore
 [user]
 	email = sebasti@nullri.ch
 	name = Sebastian Ullrich
-[color]
-	ui = auto
-[diff]
-	guitool = kdiff3
-[difftool]
-	prompt = false
 [alias]
 	co = checkout
 	cA = commit --amend -C HEAD
-	pupu = !git pull && git push
-	sudopull = !git stash && git pull && git stash pop
-	sudopupu = !git stash && git pull && git stash pop && git push
 	st = status -s
-  reco = rebase --continue
 [merge]
   conflictStyle = diff3
-[sendemail]
-	smtpencryption = tls
-	smtpserver = smtp.gmail.com
-	smtpuser = derkhabarakh@gmail.com
-	smtpserverport = 587
-	from = Sebastian Ullrich <sebasti@nullri.ch>
-	envelopesender = Sebastian Ullrich <sebasti@nullri.ch>
-	confirm = always
-	multiedit = true
-[push]
-	default = simple
 [pull]
   rebase = true
 [rebase]
