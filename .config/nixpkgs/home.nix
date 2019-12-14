@@ -6,7 +6,7 @@ let
   xdg_utils = pkgs.xdg_utils.overrideAttrs (attrs: {
     postInstall = attrs.postInstall + ''
       sed  '3s#.#\
-      mimetype() { false; }\
+      mimetype() { ${pkgs.perlPackages.FileMimeInfo}/bin/mimetype "$@"; }\
       &#' -i "$out"/bin/*
     '' + attrs.postInstall;
   });
@@ -23,7 +23,7 @@ in {
     # dev
     jetbrains.clion elan gitAndTools.hub gitAndTools.tig python3Packages.ipython lorri
     # other desktop apps
-    firefox evince
+    firefox chromium evince
     # other cli apps
     fasd htop mpv file python3Packages.howdoi
     # Rust all the things
@@ -40,6 +40,8 @@ in {
     enable = true;
     defaultApplications = {
       "application/pdf" = [ "org.gnome.Evince.desktop" ];
+      "x-scheme-handler/http" = [ "firefox.desktop" ];
+      "x-scheme-handler/https" = [ "firefox.desktop" ];
     };
   };
 
