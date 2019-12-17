@@ -590,7 +590,7 @@ This function is called at the very end of Spacemacs initialization."
  '(direnv-always-show-summary nil)
  '(evil-shift-round nil)
  '(evil-want-Y-yank-to-eol nil)
- '(fill-column 120)
+ '(fill-column 90)
  '(fill-nobreak-predicate (quote (texmathp)))
  '(flycheck-pos-tip-timeout 10)
  '(flycheck-rust-cargo-executable "/home/sebastian/.cargo/bin/cargo")
