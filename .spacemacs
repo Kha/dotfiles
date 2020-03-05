@@ -26,7 +26,6 @@ This function should only modify configuration layer settings."
    ;; a layer lazily. (default t)
    dotspacemacs-ask-for-lazy-installation t
 
-   ;; If non-nil layers with lazy install support are lazy installed.
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
@@ -34,9 +33,6 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(haskell
-     racket
-     javascript
-     typescript
      yaml
      graphviz
      html
@@ -62,7 +58,6 @@ This function should only modify configuration layer settings."
      nixos
      org
      python
-     rust
      semantic
      (shell :variables
      shell-default-height 30
@@ -85,7 +80,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(popwin window-purpose)
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -110,10 +105,10 @@ It should only modify the values of Spacemacs settings."
    ;; (default nil)
    dotspacemacs-enable-emacs-pdumper nil
 
-   ;; File path pointing to emacs 27.1 executable compiled with support
-   ;; for the portable dumper (this is currently the branch pdumper).
-   ;; (default "emacs-27.0.50")
-   dotspacemacs-emacs-pdumper-executable-file "emacs-27.0.50"
+   ;; Name of executable file pointing to emacs 27+. This executable must be
+   ;; in your PATH.
+   ;; (default "emacs")
+   dotspacemacs-emacs-pdumper-executable-file "emacs"
 
    ;; Name of the Spacemacs dump file. This is the file will be created by the
    ;; portable dumper in the cache directory under dumps sub-directory.
@@ -147,8 +142,8 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-use-spacelpa t
 
    ;; If non-nil then verify the signature for downloaded Spacelpa archives.
-   ;; (default nil)
-   dotspacemacs-verify-spacelpa-archives nil
+   ;; (default t)
+   dotspacemacs-verify-spacelpa-archives t
 
    ;; If non-nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
@@ -169,8 +164,10 @@ It should only modify the values of Spacemacs settings."
    ;; (default 'vim)
    dotspacemacs-editing-style 'vim
 
-   ;; If non-nil output loading progress in `*Messages*' buffer. (default nil)
-   dotspacemacs-verbose-loading nil
+   ;; If non-nil show the version string in the Spacemacs buffer. It will
+   ;; appear as (spacemacs version)@(emacs version)
+   ;; (default t)
+   dotspacemacs-startup-buffer-show-version t
 
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
@@ -388,7 +385,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-smartparens-strict-mode nil
 
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
-   ;; over any automatically added closing parenthesis, bracket, quote, etc…
+   ;; over any automatically added closing parenthesis, bracket, quote, etc...
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
    dotspacemacs-smart-closing-parenthesis nil
 
@@ -560,7 +557,7 @@ before packages are loaded."
 
   (setq-default TeX-master nil)
 
-  (setq popwin:special-display-config (cl-delete "^\\*Flycheck.+\\*$" popwin:special-display-config :key #'car :test #'equal))
+  ;(setq popwin:special-display-config (cl-delete "^\\*Flycheck.+\\*$" popwin:special-display-config :key #'car :test #'equal))
 
   (defun advice-flycheck-flush-multiline-message (msg)
     (if (s-contains? "\n" msg)
@@ -591,7 +588,7 @@ This function is called at the very end of Spacemacs initialization."
  '(evil-shift-round nil)
  '(evil-want-Y-yank-to-eol nil)
  '(fill-column 80)
- '(fill-nobreak-predicate (quote (texmathp)))
+ '(fill-nobreak-predicate (quote (texmathp TeX-verbatim-p)))
  '(flycheck-pos-tip-timeout 10)
  '(flycheck-rust-cargo-executable "/home/sebastian/.cargo/bin/cargo")
  '(git-commit-summary-max-length 999)
