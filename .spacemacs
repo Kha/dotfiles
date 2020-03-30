@@ -566,6 +566,10 @@ before packages are loaded."
   (advice-add #'flycheck-flush-multiline-message :override #'advice-flycheck-flush-multiline-message)
 
   (direnv-mode)
+
+  (defun texverbatimp ()
+    ; TeX-verbatim-p is not autoloaded
+    (and TeX-verbatim-p (TeX-verbatim-p)))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -588,7 +592,7 @@ This function is called at the very end of Spacemacs initialization."
  '(evil-shift-round nil)
  '(evil-want-Y-yank-to-eol nil)
  '(fill-column 80)
- '(fill-nobreak-predicate (quote (texmathp TeX-verbatim-p)))
+ '(fill-nobreak-predicate (quote (texmathp texverbatimp)))
  '(flycheck-pos-tip-timeout 10)
  '(flycheck-rust-cargo-executable "/home/sebastian/.cargo/bin/cargo")
  '(git-commit-summary-max-length 999)
