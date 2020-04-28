@@ -17,7 +17,7 @@ in {
     # system
     pavucontrol xdg_utils gnome3.adwaita-icon-theme
     # fonts!
-    iosevka-ss09
+    iosevka
     # editing
     emacs ispell vim_configurable
     # dev
@@ -25,7 +25,7 @@ in {
     # other desktop apps
     firefox chromium evince
     # other cli apps
-    fasd htop mpv file python3Packages.howdoi
+    fasd htop mpv file
     # Rust all the things
     alacritty exa fd ripgrep
   ];
