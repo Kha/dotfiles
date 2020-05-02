@@ -3,7 +3,6 @@
 	name = Sebastian Ullrich
 [alias]
 	co = checkout
-	cA = commit --amend -C HEAD
 	st = status -s
 [merge]
   conflictStyle = diff3

@@ -1,14 +1,6 @@
 { config, pkgs, ... }:
 
-let
-  xdg_utils = pkgs.xdg_utils.overrideAttrs (attrs: {
-    postInstall = attrs.postInstall + ''
-      sed  '3s#.#\
-      mimetype() { ${pkgs.perlPackages.FileMimeInfo}/bin/mimetype "$@"; }\
-      &#' -i "$out"/bin/*
-    '' + attrs.postInstall;
-  });
-in {
+{
   home.packages = with pkgs; [
     # window manager
     sway xwayland i3status mako grim slurp wl-clipboard
