@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 
 let
-  lorri-src = builtins.fetchGit { url = https://github.com/target/lorri.git; rev = "8224dfb57e508ec87d38a4ce7b9ce27bbf7c2a81"; };
-  lorri = import lorri-src { src = lorri-src; };
   xdg_utils = pkgs.xdg_utils.overrideAttrs (attrs: {
     postInstall = attrs.postInstall + ''
       sed  '3s#.#\
