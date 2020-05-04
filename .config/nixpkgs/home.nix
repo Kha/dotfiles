@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  imports = if builtins.pathExists ./local.nix then [ ./local.nix ] else [];
+
   home.packages = with pkgs; [
     # window manager
     sway xwayland i3status mako grim slurp wl-clipboard
@@ -9,13 +11,13 @@
     # fonts!
     iosevka
     # editing
-    emacs ispell vim_configurable
+    emacs ispell vim_configurable libreoffice
     # dev
-    jetbrains.clion elan gitAndTools.hub gitAndTools.tig python3Packages.ipython lorri
+    jetbrains.clion elan gitAndTools.hub gitAndTools.tig python3Packages.ipython lorri gdb meld rr
     # other desktop apps
     firefox chromium evince
     # other cli apps
-    fasd htop mpv file
+    fasd htop mpv file unzip
     # Rust all the things
     alacritty exa fd ripgrep
   ];
