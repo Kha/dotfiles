@@ -13,7 +13,7 @@
     # editing
     emacs ispell vim_configurable libreoffice
     # dev
-    jetbrains.clion elan gitAndTools.hub gitAndTools.tig python3Packages.ipython lorri gdb meld rr
+    jetbrains.clion elan gitAndTools.hub gitAndTools.tig python3Packages.ipython gdb meld rr
     # other desktop apps
     firefox chromium evince
     # other cli apps
@@ -25,6 +25,8 @@
   programs.direnv.enable = true;
   programs.fzf.enable = true;
   programs.git.enable = true;
+
+  services.lorri.enable = true;
 
   gtk.enable = true;
   fonts.fontconfig.enable = true;
