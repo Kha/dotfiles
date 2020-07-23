@@ -64,7 +64,6 @@
       _JAVA_AWT_WM_NONREPARENTING = 1;
       # fix locales for Nix on Ubuntu
       LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
-      XDG_DATA_DIRS = "$XDG_DATA_DIRS:$HOME/.nix-profile/share";
     };
     shellAliases = {
       ls = "exa";
