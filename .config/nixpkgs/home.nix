@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
-{
+let unstable = import <unstable> {};
+in {
   imports = if builtins.pathExists ./local.nix then [ ./local.nix ] else [];
 
   home.packages = with pkgs; [
@@ -13,13 +14,14 @@
     # editing
     emacs ispell vim_configurable libreoffice
     # dev
-    jetbrains.clion elan gitAndTools.hub gitAndTools.tig python3Packages.ipython gdb meld rr
+    jetbrains.clion elan gitAndTools.hub gitAndTools.tig gdb meld rr
     # other desktop apps
     firefox chromium evince
     # other cli apps
     fasd htop mpv file unzip
     # Rust all the things
-    alacritty exa fd ripgrep
+    # magit-delta needs delta >= 0.0.18
+    alacritty exa fd ripgrep unstable.gitAndTools.delta
   ];
 
   programs.direnv.enable = true;
