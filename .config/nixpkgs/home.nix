@@ -21,12 +21,47 @@ in {
     fasd htop mpv file unzip
     # Rust all the things
     # magit-delta needs delta >= 0.0.18
-    alacritty exa fd ripgrep unstable.gitAndTools.delta
+    exa fd ripgrep unstable.gitAndTools.delta
   ];
 
   programs.direnv.enable = true;
   programs.fzf.enable = true;
   programs.git.enable = true;
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      font = {
+        size = 11;
+        normal.family = "Iosevka";
+      };
+      colors = {
+        primary = {
+          background = "0x3f3f3f";
+          foreground = "0xeaeaea";
+        };
+        normal = {
+          black =   "0x000000";
+          red =     "0xd54e53";
+          green =   "0xb9ca4a";
+          yellow =  "0xe6c547";
+          blue =    "0x7aa6da";
+          magenta = "0xc397d8";
+          cyan =    "0x70c0ba";
+          white =   "0xeaeaea";
+        };
+        bright = {
+          black =   "0x666666";
+          red =     "0xff3334";
+          green =   "0x9ec400";
+          yellow =  "0xe7c547";
+          blue =    "0x7aa6da";
+          magenta = "0xb77ee0";
+          cyan =    "0x54ced6";
+          white =   "0xffffff";
+        };
+      };
+    };
+  };
 
   services.lorri.enable = true;
 
