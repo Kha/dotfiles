@@ -492,7 +492,6 @@ before packages are loaded."
   (spacemacs|define-jump-handlers lean-mode (lean-find-definition :async t))
 
   (add-to-load-path "~/lean/lean/lean4-mode")
-  (setq lean4-rootdir "/home/sebastian/lean/lean")
   (require 'lean4-mode nil t)
   (push 'lean-mode spacemacs-indent-sensitive-modes)
   (push 'lean4-mode spacemacs-indent-sensitive-modes)
@@ -584,6 +583,7 @@ This function is called at the very end of Spacemacs initialization."
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(c-basic-offset 4)
+ '(c-offsets-alist (quote ((innamespace . 0) (inlambda . 0))))
  '(default-input-method "Lean")
  '(direnv-always-show-summary nil)
  '(evil-shift-round nil)
