@@ -74,7 +74,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(direnv lean-mode company-lean helm-lean)
+   dotspacemacs-additional-packages '(dired-launch direnv lean-mode company-lean helm-lean magit-delta)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -548,6 +548,7 @@ before packages are loaded."
   (with-eval-after-load 'smartparens
     (sp-local-pair 'lean4-mode "/-" "-/")
     (sp-local-pair 'lean4-mode "`'" nil :actions :rem)
+    (sp-local-pair 'lean4-mode "`" nil :actions :rem)
     (sp-local-pair 'lean4-mode "⟨" "⟩")
     (sp-local-pair 'lean4-mode "«" "»"))
 
@@ -560,6 +561,8 @@ before packages are loaded."
         (replace-regexp-in-string "\\([\r\n]+\\)\\(.\\)" "\\1    \\2" (concat "\n" msg))
       msg))
   (advice-add #'flycheck-flush-multiline-message :override #'advice-flycheck-flush-multiline-message)
+
+  (dired-launch-enable)
 
   (direnv-mode)
 
