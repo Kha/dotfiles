@@ -1,27 +1,31 @@
 { config, pkgs, ... }:
 
-let unstable = import <unstable> {};
+let
+  meld = pkgs.runCommand "${pkgs.meld.name}-wrapped" { buildInputs = [ pkgs.makeWrapper ]; } ''
+    cp -r ${pkgs.meld} $out
+    chmod u+w $out/bin $out/bin/meld
+    makeWrapper ${pkgs.meld}/bin/meld \
+      $out/bin/meld \
+      --set GDK_PIXBUF_MODULE_FILE "${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"
+  '';
 in {
-  imports = if builtins.pathExists ./local.nix then [ ./local.nix ] else [];
-
   home.packages = with pkgs; [
     # window manager
     sway xwayland i3status mako grim slurp wl-clipboard
     # system
     pavucontrol xdg_utils gnome3.adwaita-icon-theme
     # fonts!
-    iosevka
+    iosevka emacs-all-the-icons-fonts
     # editing
     emacs ispell vim_configurable libreoffice
     # dev
-    jetbrains.clion elan gitAndTools.hub gitAndTools.tig gdb meld rr
+    gitAndTools.hub gitAndTools.tig gdb meld rr python3
     # other desktop apps
     firefox chromium evince
     # other cli apps
     fasd htop mpv file unzip
     # Rust all the things
-    # magit-delta needs delta >= 0.0.18
-    exa fd ripgrep unstable.gitAndTools.delta
+    exa fd ripgrep gitAndTools.delta
   ];
 
   programs.direnv.enable = true;
@@ -82,9 +86,14 @@ in {
   #  extraPackages = epkgs: [ epkgs.magit ];
   #};
 
+  #programs.vscode = {
+  #  enable = true;
+  #  extensions = with pkgs.vscode-extensions; [ vscodevim.vim bbenoist.Nix ];
+  #};
+
   programs.zsh = {
     enable = true;
-    enableCompletion = true;
+    enableCompletion = false;
     oh-my-zsh = {
       enable = true;
       plugins = [ "fasd" "per-directory-history" ];
@@ -114,9 +123,6 @@ in {
       setopt prompt_sp
     '';
   };
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
 
   home.stateVersion = "18.09";
 }
