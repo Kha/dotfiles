@@ -55,5 +55,16 @@
 ;; they are implemented.
 
 (setq evil-snipe-override-evil-repeat-keys nil) ;; unset `,`
-(setq doom-localleader-key ",")
-(setq doom-localleader-alt-key "M-,")
+;(setq doom-localleader-key ",")
+;(setq doom-localleader-alt-key "M-,")
+(after! evil (evil-define-key 'normal global-map "," 'evil-execute-in-god-state))
+(after! which-key (which-key-enable-god-mode-support))
+
+(after! lsp-ui
+  (setq lsp-ui-doc-enable t
+        lsp-ui-doc-include-signature t
+        lsp-ui-doc-max-width 150
+        lsp-headerline-breadcrumb-enable t))
+
+(after! magit
+  (setq magit-save-repository-buffers t))

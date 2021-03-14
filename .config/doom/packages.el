@@ -57,6 +57,10 @@
 ;(package! lsp-mode)
 
 (package! lean4-mode :recipe
-  (:host github
-   :repo "leanprover/lean4"
-   :files ("lean4-mode/*.el")))
+  (:local-repo "~/lean/lean"
+   :files ("lean4-mode/*.el")
+   :build (:not compile)))
+
+(package! evil-god-state)
+
+(package! lsp-mode :pin "db385a4")
