@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, ... }:
 
 let
   meld = pkgs.runCommand "${pkgs.meld.name}-wrapped" { buildInputs = [ pkgs.makeWrapper ]; } ''

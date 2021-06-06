@@ -1,10 +1,13 @@
 {
   inputs = {
     nix.url = github:NixOS/nix;
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-20.09;
-    home-manager.url = github:rycee/home-manager/release-20.09;
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-21.05;
+    unstable.url = github:NixOS/nixpkgs/nixos-unstable;
+    home-manager.url = github:rycee/home-manager/release-21.05;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = github:NixOS/nixos-hardware;
+    nix-ld.url = "github:Mic92/nix-ld";
+    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   # based on https://github.com/davidtwco/veritas/blob/master/flake.nix
@@ -13,6 +16,7 @@
     let
       forEachSystem = genAttrs [ "x86_64-linux" ];
       pkgsBySystem = forEachSystem (system:
+        let unstable = import inputs.unstable { inherit system; config = import ./nixpkgs/config.nix; }; in
         import inputs.nixpkgs {
           inherit system;
           config = import ./nixpkgs/config.nix;
