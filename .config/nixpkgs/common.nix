@@ -21,7 +21,7 @@ in {
     # dev
     gitAndTools.hub gitAndTools.tig gdb meld rr python3
     # other desktop apps
-    firefox chromium evince
+    firefox chromium evince thunderbird
     # other cli apps
     fasd htop mpv file unzip
     # Rust all the things

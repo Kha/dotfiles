@@ -46,7 +46,7 @@ output 'Fujitsu Siemens Computers GmbH P27-8 TS Pro YVAQ010117' pos 1680,0
 # Example configuration:
 #
 exec swayidle -w \
-              resume 'swaymsg "output * dpms on"' \
+         resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock -f -c 000000' \
          timeout 600 'swaylock -f -c 000000' \
          timeout 600 'swaymsg "output * dpms off"'

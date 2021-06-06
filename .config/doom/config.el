@@ -68,3 +68,6 @@
 
 (after! magit
   (setq magit-save-repository-buffers t))
+
+;; continue comments, of course
+(setq comment-multi-line t)

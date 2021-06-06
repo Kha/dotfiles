@@ -63,4 +63,4 @@
 
 (package! evil-god-state)
 
-(package! lsp-mode :pin "db385a4")
+(package! lsp-mode :pin "baf75e9") ; 2021-04-29
