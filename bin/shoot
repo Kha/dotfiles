@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-grim -cg "$(slurp)" - | wl-copy -t image/png
+grim -g "$(slurp)" - | wl-copy -t image/png
