@@ -67,7 +67,9 @@
         lsp-headerline-breadcrumb-enable t))
 
 (after! magit
-  (setq magit-save-repository-buffers t))
+  (setq magit-save-repository-buffers t)
+  (setq git-commit-style-convention-checks
+        (remove 'overlong-summary-line git-commit-style-convention-checks)))
 
 ;; continue comments, of course
 (setq comment-multi-line t)
