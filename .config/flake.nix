@@ -108,8 +108,11 @@
             nixpkgs = {
               config = import ./nixpkgs/config.nix;
             };
+            home.packages = [inputs.nix.defaultPackage.${system}];
           };
+          homeDirectory = "/home/sebastian";
           pkgs = pkgsBySystem."${system}";
+          username = "sebastian";
         });
     in
     {
@@ -120,6 +123,10 @@
         wandersail = { system = "x86_64-linux"; config = ./nixpkgs/wandersail.nix; };
 
         i44pc65 = { system = "x86_64-linux"; config = ./nixpkgs/i44pc65.nix; };
+      };
+
+      homeManagerHostConfigurations = mapAttrs' mkHomeManagerHostConfiguration {
+        i44pc65 = { system = "x86_64-linux"; };
       };
 
       # Attribute set of hostnames to evaluated NixOS configurations. Consumed by `nixos-rebuild`

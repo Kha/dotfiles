@@ -124,5 +124,5 @@ in {
     '';
   };
 
-  home.stateVersion = "18.09";
+  home.stateVersion = "20.09";
 }
