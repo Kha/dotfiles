@@ -61,6 +61,6 @@
    :files ("lean4-mode/*.el")
    :build (:not compile)))
 
-(package! evil-god-state)
+;(package! evil-god-state)
 
 (package! lsp-mode :pin "baf75e9") ; 2021-04-29

@@ -37,6 +37,8 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.kernel.sysctl."kernel.sysrq" = 1;  # enable all sysrqs
+
   # tlp enabled by nixos-hardware
   services.tlp.settings.START_CHARGE_THRESH_BAT0 = 75;
   services.tlp.settings.STOP_CHARGE_THRESH_BAT0 = 80;
@@ -70,6 +72,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget vim manpages
+    alsaUtils pamixer
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -120,10 +123,18 @@
 
   # Enable sound.
   # sound.enable = true;
-  hardware.pulseaudio = {
+  #hardware.pulseaudio = {
+  #  enable = true;
+  #  extraModules = [ pkgs.pulseaudio-modules-bt ];
+  #  package = pkgs.pulseaudioFull;
+  #};
+  # rtkit is optional but recommended
+  security.rtkit.enable = true;
+  services.pipewire = {
     enable = true;
-    extraModules = [ pkgs.pulseaudio-modules-bt ];
-    package = pkgs.pulseaudioFull;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
   };
 
   # for Steam
@@ -175,7 +186,7 @@
     portal = {
       enable = true;
       extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
+        xdg-desktop-portal-wlr
       ];
       gtkUsePortal = true;
     };

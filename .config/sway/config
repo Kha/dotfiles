@@ -40,6 +40,7 @@ for_window [class="^scratch$"] move to scratchpad
 
 output 'Goldstar Company Ltd W2242 0x0000E431' pos 0,0
 output 'Fujitsu Siemens Computers GmbH P27-8 TS Pro YVAQ010117' pos 1680,0
+Output 'Samsung Electric Company SyncMaster 0x00007E34' pos 1920,0
 
 ### Idle configuration
 #
@@ -217,9 +218,9 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-bindsym XF86AudioRaiseVolume exec amixer set Master playback 5%+; killall -USR1 i3status
-bindsym XF86AudioLowerVolume exec amixer set Master playback 5%-; killall -USR1 i3status
-bindsym XF86AudioMute exec amixer set Master toggle; killall -USR1 i3status
+bindsym XF86AudioRaiseVolume exec pamixer -i 5; killall -USR1 i3status
+bindsym XF86AudioLowerVolume exec pamixer -d 5; killall -USR1 i3status
+bindsym XF86AudioMute exec pamixer -t; killall -USR1 i3status
 bindsym XF86MonBrightnessDown exec light -U 5
 bindsym XF86MonBrightnessUp exec light -A 5
 

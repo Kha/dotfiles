@@ -13,7 +13,7 @@
     Unit.Description = "backup to rsync.net";
     Service = {
       Environment = ''PATH=${ pkgs.lib.makeBinPath [ pkgs.openssh ] }'';
-      ExecStart = ''${pkgs.rsync}/bin/rsync -avxH --exclude=/.cache/ --exclude=/.ccache/ --exclude=/.local/ --delete-before /home/sebastian/ rsync:sebastian'';
+      ExecStart = ''${pkgs.rsync}/bin/rsync -avxH --exclude=/.cache/ --exclude=/.ccache/ --exclude=/.local/ --exclude=/Downloads/ --exclude=build/ --delete-before --delete-excluded /home/sebastian/ rsync:sebastian'';
     };
   };
 
