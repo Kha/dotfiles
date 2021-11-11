@@ -96,6 +96,10 @@
                   from = { id = "nixpkgs"; type = "indirect"; };
                   to = toInput inputs.nixpkgs;
                 }
+                {
+                  from = { id = "lean"; type = "indirect"; };
+                  to = { type = "path"; path = "/home/sebastian/lean/lean"; };
+                }
               ];
           };
         });
