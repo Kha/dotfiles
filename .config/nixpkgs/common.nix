@@ -19,7 +19,7 @@ in {
     # editing
     emacs ispell vim_configurable libreoffice
     # dev
-    gitAndTools.gh gitAndTools.tig gdb meld rr python3
+    gitAndTools.gh gitAndTools.tig gdb meld rr python3 binutils
     # other desktop apps
     firefox-wayland chromium evince thunderbird
     # other cli apps
