@@ -97,6 +97,10 @@
                   to = toInput inputs.nixpkgs;
                 }
                 {
+                  from = { id = "unstable"; type = "indirect"; };
+                  to = toInput inputs.unstable;
+                }
+                {
                   from = { id = "lean"; type = "indirect"; };
                   to = { type = "path"; path = "/home/sebastian/lean/lean"; };
                 }
