@@ -63,4 +63,7 @@
 
 ;(package! evil-god-state)
 
-(package! lsp-mode :pin "baf75e9") ; 2021-04-29
+;(package! lsp-mode :pin "52048d4") ; 2021-06-18
+;(package! lsp-mode :recipe
+;  (:local-repo "~/lib/lsp-mode"
+;   :build (:not compile)))

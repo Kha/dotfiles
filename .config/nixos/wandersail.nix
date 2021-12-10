@@ -8,6 +8,7 @@
   ];
 
   hardware.enableRedistributableFirmware = true;
+  hardware.cpu.amd.updateMicrocode = true;
 
   # from hardware-config
   boot.initrd.availableKernelModules = [ "nvme" "ehci_pci" "xhci_pci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
@@ -35,7 +36,10 @@
 
   boot.tmpOnTmpfs = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages =
+    # https://github.com/rr-debugger/rr/issues/2990
+    assert lib.versionOlder pkgs.linuxPackages_latest.kernel.version "5.16";
+    pkgs.linuxPackages_5_14;
 
   boot.kernel.sysctl."kernel.sysrq" = 1;  # enable all sysrqs
 
