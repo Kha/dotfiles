@@ -10,22 +10,16 @@ let
   '';
 in {
   home.packages = with pkgs; [
-    # window manager
-    sway xwayland i3status mako grim slurp wl-clipboard
-    # system
-    pavucontrol xdg_utils gnome3.adwaita-icon-theme
     # fonts!
-    iosevka emacs-all-the-icons-fonts
+    emacs-all-the-icons-fonts
     # editing
-    emacs ispell vim_configurable libreoffice
+    emacs ispell vim_configurable
     # dev
-    gitAndTools.gh gitAndTools.tig gdb meld rr python3 binutils jq
-    # other desktop apps
-    firefox-wayland chromium evince thunderbird
+    gitAndTools.gh gitAndTools.tig gdb meld python3 binutils jq
     # other cli apps
     fasd htop mpv file unzip
     # Rust all the things
-    exa fd ripgrep gitAndTools.delta
+    fd ripgrep gitAndTools.delta
   ];
 
   programs.direnv.enable = true;
@@ -67,19 +61,6 @@ in {
     };
   };
 
-  services.lorri.enable = true;
-
-  gtk.enable = true;
-  fonts.fontconfig.enable = true;
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "application/pdf" = [ "org.gnome.Evince.desktop" ];
-      "x-scheme-handler/http" = [ "firefox.desktop" ];
-      "x-scheme-handler/https" = [ "firefox.desktop" ];
-    };
-  };
-
   # on second thought, just use spacemacs
   #programs.emacs = {
   #  enable = true;
@@ -106,13 +87,8 @@ in {
       DEFAULT_USER = "sebastian";
       # disable default rprompt...?
       RPROMPT = "";
-      # fix Java programs on sway
-      _JAVA_AWT_WM_NONREPARENTING = 1;
-      # fix locales for Nix on Ubuntu
-      LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     };
     shellAliases = {
-      ls = "exa";
       ssh = "TERM=xterm-256color ssh";
       p = "noglob p";
     };

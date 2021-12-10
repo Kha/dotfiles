@@ -14,7 +14,7 @@
   outputs = { self, ... } @ inputs:
     with inputs.nixpkgs.lib;
     let
-      forEachSystem = genAttrs [ "x86_64-linux" ];
+      forEachSystem = genAttrs [ "x86_64-linux" "aarch64-darwin" ];
       pkgsBySystem = forEachSystem (system:
         let unstable = import inputs.unstable { inherit system; config = import ./nixpkgs/config.nix; }; in
         import inputs.nixpkgs {
@@ -67,11 +67,6 @@
             (import config)
           ];
 
-          # For compatibility with nix-shell, nix-build, etc.
-          home.file.".nixpkgs".source = inputs.nixpkgs;
-          systemd.user.sessionVariables."NIX_PATH" =
-            mkForce "nixpkgs=$HOME/.nixpkgs\${NIX_PATH:+:}$NIX_PATH";
-
           # Re-expose self and nixpkgs as flakes.
           xdg.configFile."nix/registry.json".text = builtins.toJSON {
             version = 2;
@@ -102,7 +97,7 @@
                 }
                 {
                   from = { id = "lean"; type = "indirect"; };
-                  to = { type = "path"; path = "/home/sebastian/lean/lean"; };
+                  to = { type = "path"; path = (if system == "aarch64-darwin" then "/Users/sebastian" else "/home/sebastian") + "/lean/lean"; };
                 }
               ];
           };
@@ -118,7 +113,7 @@
             };
             home.packages = [inputs.nix.defaultPackage.${system}];
           };
-          homeDirectory = "/home/sebastian";
+          homeDirectory = if system == "aarch64-darwin" then "/Users/sebastian" else "/home/sebastian";
           pkgs = pkgsBySystem."${system}";
           username = "sebastian";
         });
@@ -131,10 +126,14 @@
         wandersail = { system = "x86_64-linux"; config = ./nixpkgs/wandersail.nix; };
 
         i44pc65 = { system = "x86_64-linux"; config = ./nixpkgs/i44pc65.nix; };
+
+        i44mac1 = { system = "aarch64-darwin"; config = ./nixpkgs/i44mac1.nix; };
       };
 
       homeManagerHostConfigurations = mapAttrs' mkHomeManagerHostConfiguration {
         i44pc65 = { system = "x86_64-linux"; };
+
+        i44mac1 = { system = "aarch64-darwin"; };
       };
 
       # Attribute set of hostnames to evaluated NixOS configurations. Consumed by `nixos-rebuild`
