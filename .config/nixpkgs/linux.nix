@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, ... }:
+{ config, lib, pkgs, unstable, ... }:
 
 {
   home.packages = with pkgs; [
@@ -41,9 +41,4 @@
       LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     };
   };
-
-  # For compatibility with nix-shell, nix-build, etc.
-  home.file.".nixpkgs".source = inputs.nixpkgs;
-  systemd.user.sessionVariables."NIX_PATH" =
-    mkForce "nixpkgs=$HOME/.nixpkgs\${NIX_PATH:+:}$NIX_PATH";
 }

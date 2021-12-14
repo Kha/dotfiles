@@ -140,6 +140,8 @@
       # on those hosts.
       nixosConfigurations = mapAttrs' mkNixOsConfiguration {
         wandersail = { system = "x86_64-linux"; config = ./nixos/wandersail.nix; };
+
+        soothebox = { system = "x86_64-linux"; config = ./nixos/wandersail.nix; };
       };
   };
 }
