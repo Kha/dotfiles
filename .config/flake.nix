@@ -97,7 +97,7 @@
                 }
                 {
                   from = { id = "lean"; type = "indirect"; };
-                  to = { type = "path"; path = (if system == "aarch64-darwin" then "/Users/sebastian" else "/home/sebastian") + "/lean/lean"; };
+                  to = { type = "git"; url = "file://${if system == "aarch64-darwin" then "/Users" else "/home"}/sebastian/lean/lean"; };
                 }
               ];
           };
