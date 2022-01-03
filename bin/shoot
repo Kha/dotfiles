@@ -1,2 +1,6 @@
 #!/usr/bin/env bash
-grim -g "$(slurp)" - | wl-copy -t image/png
+if [ -n "$DISPLAY" ]; then
+  scrot -s -e 'xclip -selection clipboard -t image/png -i $f'
+else
+  grim -g "$(slurp)" - | wl-copy -t image/png
+fi

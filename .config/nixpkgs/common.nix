@@ -17,7 +17,7 @@ in {
     # dev
     gitAndTools.gh gitAndTools.tig gdb meld python3 binutils jq
     # other cli apps
-    fasd htop mpv file unzip
+    fasd htop mpv file unzip psmisc
     # Rust all the things
     fd ripgrep gitAndTools.delta
   ];

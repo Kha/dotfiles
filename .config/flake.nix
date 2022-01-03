@@ -125,6 +125,8 @@
       homeManagerConfigurations = mapAttrs' mkHomeManagerConfiguration {
         wandersail = { system = "x86_64-linux"; config = ./nixpkgs/wandersail.nix; };
 
+        soothebox = { system = "x86_64-linux"; config = ./nixpkgs/wandersail.nix; };
+
         i44pc65 = { system = "x86_64-linux"; config = ./nixpkgs/i44pc65.nix; };
 
         i44mac1 = { system = "aarch64-darwin"; config = ./nixpkgs/i44mac1.nix; };
@@ -141,7 +143,7 @@
       nixosConfigurations = mapAttrs' mkNixOsConfiguration {
         wandersail = { system = "x86_64-linux"; config = ./nixos/wandersail.nix; };
 
-        soothebox = { system = "x86_64-linux"; config = ./nixos/wandersail.nix; };
+        soothebox = { system = "x86_64-linux"; config = ./nixos/soothebox.nix; };
       };
   };
 }
