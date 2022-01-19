@@ -12,8 +12,8 @@
 
   boot.kernelPackages =
     # https://github.com/rr-debugger/rr/issues/2990
-    assert lib.versionOlder pkgs.linuxPackages_latest.kernel.version "5.16";
-    pkgs.linuxPackages_5_14;
+    assert pkgs.linuxPackages.kernelOlder "5.15.5";
+    pkgs.linuxPackages_5_16;
 
   boot.kernel.sysctl."kernel.sysrq" = 1;  # enable all sysrqs
 
