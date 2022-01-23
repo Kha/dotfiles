@@ -57,8 +57,7 @@
 ;(package! lsp-mode)
 
 (package! lean4-mode :recipe
-  (:local-repo "~/lean/lean"
-   :files ("lean4-mode/*.el")
+  (:local-repo "~/lean/lean4-mode"
    :build (:not compile)))
 
 ;(package! evil-god-state)

@@ -22,9 +22,31 @@ in {
     fd ripgrep gitAndTools.delta
   ];
 
+  home.file = {
+    bin.source = ../bin;
+  };
+
   programs.direnv.enable = true;
   programs.fzf.enable = true;
-  programs.git.enable = true;
+  programs.gh = {
+    enable = true;
+    settings.aliases.co = "pr checkout";
+  };
+  programs.git = {
+    delta.enable = true;
+    enable = true;
+    userName = "Sebastian Ullrich";
+    userEmail = "sebasti@nullri.ch";
+    aliases = {
+      "co" = "checkout";
+      "st" = "status -s";
+    };
+    extraConfig = {
+      merge.conflictStyle = "diff3";
+      pull.rebase = "true";
+      rebase.autoStash = "true";
+    };
+  };
   programs.alacritty = {
     enable = true;
     settings = {
