@@ -103,7 +103,7 @@
           };
         });
 
-      mkHomeManagerHostConfiguration = name: { system }:
+      mkHomeManagerHomeConfiguration = name: { system }:
         nameValuePair name (inputs.home-manager.lib.homeManagerConfiguration {
           inherit system;
           configuration = { ... }: {
@@ -121,7 +121,7 @@
     {
       # Attribute set of hostnames to home-manager modules with the entire configuration for
       # that host - consumed by the home-manager NixOS module for that host (if it exists)
-      # or by `mkHomeManagerHostConfiguration` for home-manager-only hosts.
+      # or by `mkHomeManagerHomeConfiguration` for home-manager-only hosts.
       homeManagerConfigurations = mapAttrs' mkHomeManagerConfiguration {
         wandersail = { system = "x86_64-linux"; config = ./nixpkgs/wandersail.nix; };
 
@@ -132,10 +132,10 @@
         i44mac1 = { system = "aarch64-darwin"; config = ./nixpkgs/i44mac1.nix; };
       };
 
-      homeManagerHostConfigurations = mapAttrs' mkHomeManagerHostConfiguration {
-        i44pc65 = { system = "x86_64-linux"; };
+      homeConfigurations = mapAttrs' mkHomeManagerHomeConfiguration {
+        "sebastian@i44pc65" = { system = "x86_64-linux"; };
 
-        i44mac1 = { system = "aarch64-darwin"; };
+        "sebastian@i44mac1" = { system = "aarch64-darwin"; };
       };
 
       # Attribute set of hostnames to evaluated NixOS configurations. Consumed by `nixos-rebuild`
