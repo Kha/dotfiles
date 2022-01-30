@@ -122,7 +122,8 @@
 
   programs.sway.enable = true;
   programs.light.enable = true;
-  #programs.zsh.enable = true;
+  # necessary to get `nix` completion
+  programs.zsh.enable = true;
 
   services.fwupd.enable = true;
 

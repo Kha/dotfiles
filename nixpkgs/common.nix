@@ -97,7 +97,6 @@ in {
 
   programs.zsh = {
     enable = true;
-    enableCompletion = false;
     oh-my-zsh = {
       enable = true;
       plugins = [ "fasd" "per-directory-history" ];
