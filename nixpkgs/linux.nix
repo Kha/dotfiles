@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     # window manager
-    sway xwayland i3status mako grim slurp wl-clipboard
+    sway xwayland dmenu i3status mako grim slurp wl-clipboard
     # system
     pavucontrol xdg_utils gnome3.adwaita-icon-theme
     # fonts!

@@ -50,6 +50,7 @@ in {
   programs.alacritty = {
     enable = true;
     settings = {
+      shell.program = "${pkgs.zsh}/bin/zsh";
       font = {
         size = 11;
         normal.family = "Iosevka";

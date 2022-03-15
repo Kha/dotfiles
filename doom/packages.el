@@ -57,8 +57,8 @@
 ;(package! lsp-mode)
 
 (package! lean4-mode :recipe
-  (:local-repo "~/lean/lean4-mode"
-   :build (:not compile)))
+  (:host github
+   :repo "leanprover/lean4-mode"))
 
 ;(package! evil-god-state)
 
