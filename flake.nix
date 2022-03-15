@@ -67,6 +67,11 @@
             (import config)
           ];
 
+          # For compatibility with nix-shell, nix-build, etc.
+          home.file.".nixpkgs".source = inputs.nixpkgs;
+          systemd.user.sessionVariables."NIX_PATH" =
+            mkForce "nixpkgs=$HOME/.nixpkgs\${NIX_PATH:+:}$NIX_PATH";
+
           # Re-expose self and nixpkgs as flakes.
           xdg.configFile."nix/registry.json".text = builtins.toJSON {
             version = 2;
@@ -127,9 +132,9 @@
 
         soothebox = { system = "x86_64-linux"; config = ./nixpkgs/wandersail.nix; };
 
-        i44pc65 = { system = "x86_64-linux"; config = ./nixpkgs/i44pc65.nix; };
+        "sebastian@i44pc65" = { system = "x86_64-linux"; config = ./nixpkgs/i44pc65.nix; };
 
-        i44mac1 = { system = "aarch64-darwin"; config = ./nixpkgs/i44mac1.nix; };
+        "sebastian@i44mac1" = { system = "aarch64-darwin"; config = ./nixpkgs/i44mac1.nix; };
       };
 
       homeConfigurations = mapAttrs' mkHomeManagerHomeConfiguration {

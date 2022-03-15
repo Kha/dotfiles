@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-if [ -n "$DISPLAY" ]; then
+if [ "$XDG_SESSION_TYPE" -eq x11 ]; then
   scrot -s -e 'xclip -selection clipboard -t image/png -i $f'
 else
   grim -g "$(slurp)" - | wl-copy -t image/png

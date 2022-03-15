@@ -73,3 +73,5 @@
 
 ;; continue comments, of course
 (setq comment-multi-line t)
+
+(setq split-width-threshold 240)
