@@ -45,6 +45,7 @@ in {
       merge.conflictStyle = "diff3";
       pull.rebase = "true";
       rebase.autoStash = "true";
+      github.user = "Kha";
     };
   };
   programs.alacritty = {

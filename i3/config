@@ -50,6 +50,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 bindsym $mod+d exec dmenu_run
+bindsym $mod+c exec networkmanager_dmenu
 
 # change focus (vim keys!)
 bindsym $mod+h focus left

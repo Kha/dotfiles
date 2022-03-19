@@ -20,7 +20,7 @@
         import inputs.nixpkgs {
           inherit system;
           config = import ./nixpkgs/config.nix;
-        }
+        } // { inherit unstable; }
       );
 
       mkNixOsConfiguration = name: { system, config }:
