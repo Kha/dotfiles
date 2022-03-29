@@ -5,7 +5,7 @@
     # window manager
     sway xwayland dmenu i3status mako grim slurp wl-clipboard
     # system
-    pavucontrol xdg_utils gnome3.adwaita-icon-theme
+    pavucontrol xdg_utils (gnome3.adwaita-icon-theme.override { gnome = null; })
     # fonts!
     iosevka
     # editing

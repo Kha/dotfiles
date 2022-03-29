@@ -63,8 +63,8 @@
 (after! lsp-ui
   (setq lsp-ui-doc-enable t
         lsp-ui-doc-include-signature t
-        lsp-ui-doc-max-width 150
-        lsp-headerline-breadcrumb-enable t))
+        lsp-ui-doc-max-width 150))
+        ;lsp-headerline-breadcrumb-enable t))
 
 (after! magit
   (setq magit-save-repository-buffers t)
