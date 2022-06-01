@@ -10,11 +10,6 @@
 
   boot.tmpOnTmpfs = true;
 
-  boot.kernelPackages =
-    # https://github.com/rr-debugger/rr/issues/2990
-    assert pkgs.linuxPackages.kernelOlder "5.15.5";
-    pkgs.linuxPackages_5_16;
-
   boot.kernel.sysctl."kernel.sysrq" = 1;  # enable all sysrqs
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -37,7 +32,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget vim manpages
+    wget vim man-pages
     alsaUtils pamixer
   ];
 
