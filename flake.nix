@@ -2,6 +2,7 @@
   inputs = {
     nix.url = github:NixOS/nix/2.8.1;
     nixpkgs.url = github:NixOS/nixpkgs/nixos-22.05;
+    nixpkgs-old.url = github:NixOS/nixpkgs/nixos-21.11;
     unstable.url = github:NixOS/nixpkgs/nixos-unstable;
     home-manager.url = github:rycee/home-manager/release-22.05;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -16,12 +17,13 @@
     let
       forEachSystem = genAttrs [ "x86_64-linux" "aarch64-darwin" ];
       pkgsBySystem = forEachSystem (system:
-        let unstable = import inputs.unstable { inherit system; config = import ./nixpkgs/config.nix; }; in
         import inputs.nixpkgs {
           inherit system;
           config = import ./nixpkgs/config.nix;
-        } // { inherit unstable; }
-      );
+        } // {
+          nixpkgs-old = import inputs.nixpkgs-old { inherit system; config = import ./nixpkgs/config.nix; };
+          unstable = import inputs.unstable { inherit system; config = import ./nixpkgs/config.nix; };
+        });
 
       mkNixOsConfiguration = name: { system, config }:
         nameValuePair name (nixosSystem {
@@ -58,7 +60,7 @@
             })
             (import config)
           ];
-          specialArgs = { inherit name inputs; };
+          specialArgs = { inherit name inputs; inherit (pkgsBySystem."${system}") nixpkgs-old unstable; };
         });
 
       mkHomeManagerConfiguration = name: { system, config }:
@@ -113,14 +115,12 @@
           inherit system;
           configuration = { ... }: {
             imports = [ self.homeManagerConfigurations."${name}" ];
-            nixpkgs = {
-              config = import ./nixpkgs/config.nix;
-            };
             home.packages = [inputs.nix.defaultPackage.${system}];
           };
           homeDirectory = if system == "aarch64-darwin" then "/Users/sebastian" else "/home/sebastian";
           pkgs = pkgsBySystem."${system}";
           username = "sebastian";
+          extraSpecialArgs = { inherit name inputs; inherit (pkgsBySystem."${system}") nixpkgs-old unstable; };
         });
     in
     {
