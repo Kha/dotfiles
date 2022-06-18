@@ -7,8 +7,6 @@
     home-manager.url = github:rycee/home-manager/release-22.05;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = github:NixOS/nixos-hardware;
-    nix-ld.url = "github:Mic92/nix-ld";
-    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   # based on https://github.com/davidtwco/veritas/blob/master/flake.nix
