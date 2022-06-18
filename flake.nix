@@ -1,6 +1,5 @@
 {
   inputs = {
-    nix.url = github:NixOS/nix/2.8.1;
     nixpkgs.url = github:NixOS/nixpkgs/nixos-22.05;
     unstable.url = github:NixOS/nixpkgs/nixos-unstable;
     home-manager.url = github:rycee/home-manager/release-22.05;
@@ -42,7 +41,7 @@
             #  # Set the system configuration revision.
             #  system.configurationRevision = lib.mkIf (self ? rev) self.rev;
             #})
-            ({ inputs, ... }: {
+            ({ inputs, unstable, ... }: {
               # Re-expose self and nixpkgs as flakes.
               nix.registry = {
                 self.flake = inputs.self;
@@ -52,7 +51,7 @@
                 };
               };
               nix.extraOptions = builtins.readFile ./nix/nix.conf;
-              nix.package = inputs.nix.defaultPackage.${system};
+              nix.package = unstable.nixUnstable;
 
               home-manager.extraSpecialArgs = { inherit inputs; inherit (pkgsBySystem."${system}") unstable; };
             })
@@ -69,8 +68,9 @@
 
           # For compatibility with nix-shell, nix-build, etc.
           home.file.".nixpkgs".source = inputs.nixpkgs;
+          home.file.".nixpkgs-unstable".source = inputs.unstable;
           systemd.user.sessionVariables."NIX_PATH" =
-            mkForce "nixpkgs=$HOME/.nixpkgs\${NIX_PATH:+:}$NIX_PATH";
+            mkForce "nixpkgs=$HOME/.nixpkgs\:unstable=$HOME/.nixpkgs-unstable:{NIX_PATH:+:}$NIX_PATH";
 
           # Re-expose self and nixpkgs as flakes.
           xdg.configFile."nix/registry.json".text = builtins.toJSON {
