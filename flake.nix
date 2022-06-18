@@ -2,7 +2,6 @@
   inputs = {
     nix.url = github:NixOS/nix/2.8.1;
     nixpkgs.url = github:NixOS/nixpkgs/nixos-22.05;
-    nixpkgs-old.url = github:NixOS/nixpkgs/nixos-21.11;
     unstable.url = github:NixOS/nixpkgs/nixos-unstable;
     home-manager.url = github:rycee/home-manager/release-22.05;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -19,7 +18,6 @@
           inherit system;
           config = import ./nixpkgs/config.nix;
         } // {
-          nixpkgs-old = import inputs.nixpkgs-old { inherit system; config = import ./nixpkgs/config.nix; };
           unstable = import inputs.unstable { inherit system; config = import ./nixpkgs/config.nix; };
         });
 
@@ -55,10 +53,12 @@
               };
               nix.extraOptions = builtins.readFile ./nix/nix.conf;
               nix.package = inputs.nix.defaultPackage.${system};
+
+              home-manager.extraSpecialArgs = { inherit inputs; inherit (pkgsBySystem."${system}") unstable; };
             })
             (import config)
           ];
-          specialArgs = { inherit name inputs; inherit (pkgsBySystem."${system}") nixpkgs-old unstable; };
+          specialArgs = { inherit name inputs; inherit (pkgsBySystem."${system}") unstable; };
         });
 
       mkHomeManagerConfiguration = name: { system, config }:
@@ -118,7 +118,7 @@
           homeDirectory = if system == "aarch64-darwin" then "/Users/sebastian" else "/home/sebastian";
           pkgs = pkgsBySystem."${system}";
           username = "sebastian";
-          extraSpecialArgs = { inherit name inputs; inherit (pkgsBySystem."${system}") nixpkgs-old unstable; };
+          extraSpecialArgs = { inherit name inputs; inherit (pkgsBySystem."${system}") unstable; };
         });
     in
     {

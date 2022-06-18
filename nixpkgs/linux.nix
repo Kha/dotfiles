@@ -1,4 +1,4 @@
-{ config, lib, pkgs, nixpkgs-old, unstable, ... }:
+{ config, lib, pkgs, unstable, ... }:
 
 {
   home.packages = with pkgs; [
@@ -13,7 +13,7 @@
     # dev
     rr
     # other desktop apps
-    firefox chromium nixpkgs-old.evince thunderbird
+    firefox chromium unstable.evince thunderbird
     # Rust all the things
     exa
   ];
