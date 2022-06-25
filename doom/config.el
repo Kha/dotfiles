@@ -71,6 +71,11 @@
   (setq git-commit-style-convention-checks
         (remove 'overlong-summary-line git-commit-style-convention-checks)))
 
+(after! smartparens
+  (sp-pair "`" "" :actions :rem)
+  (sp-local-pair 'lean4-mode "⟨" "⟩")
+  (sp-local-pair 'lean4-mode "‹" "›"))
+
 ;; continue comments, of course
 (setq comment-multi-line t)
 
