@@ -111,9 +111,9 @@
       mkHomeManagerHomeConfiguration = name: { system }:
         nameValuePair name (inputs.home-manager.lib.homeManagerConfiguration {
           inherit system;
-          configuration = { ... }: {
+          configuration = { unstable, ... }: {
             imports = [ self.homeManagerConfigurations."${name}" ];
-            home.packages = [inputs.nix.defaultPackage.${system}];
+            home.packages = [unstable.nixUnstable];
           };
           homeDirectory = if system == "aarch64-darwin" then "/Users/sebastian" else "/home/sebastian";
           pkgs = pkgsBySystem."${system}";
