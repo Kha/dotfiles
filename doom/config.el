@@ -76,6 +76,9 @@
   (sp-local-pair 'lean4-mode "⟨" "⟩")
   (sp-local-pair 'lean4-mode "‹" "›"))
 
+(after! auctex
+  (setq +latex-indent-item-continuation-offset 0))
+
 ;; continue comments, of course
 (setq comment-multi-line t)
 
