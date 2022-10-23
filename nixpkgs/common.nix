@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, ... }:
+{ config, pkgs, unstable, lean4, ... }:
 
 let
   meld = pkgs.runCommand "${pkgs.meld.name}-wrapped" { buildInputs = [ pkgs.makeWrapper ]; } ''
@@ -13,7 +13,7 @@ in {
     # fonts!
     emacs-all-the-icons-fonts
     # editing
-    emacs ispell vim_configurable
+    ispell vim_configurable
     # dev
     gitAndTools.gh gitAndTools.tig gdb meld python3 binutils jq
     # other cli apps
@@ -85,11 +85,13 @@ in {
     };
   };
 
-  # on second thought, just use spacemacs
-  #programs.emacs = {
-  #  enable = true;
-  #  extraPackages = epkgs: [ epkgs.magit ];
-  #};
+  programs.doom-emacs = {
+    enable = true;
+    doomPrivateDir = ../doom;
+    emacsPackagesOverlay = self: super: {
+      inherit (lean4) lean4-mode;
+    };
+  };
 
   #programs.vscode = {
   #  enable = true;

@@ -5,6 +5,8 @@
     home-manager.url = github:rycee/home-manager/release-22.05;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = github:NixOS/nixos-hardware;
+    nix-doom-emacs.url = github:nix-community/nix-doom-emacs;
+    lean4.url = github:leanprover/lean4;
   };
 
   # based on https://github.com/davidtwco/veritas/blob/master/flake.nix
@@ -18,6 +20,7 @@
           config = import ./nixpkgs/config.nix;
         } // {
           unstable = import inputs.unstable { inherit system; config = import ./nixpkgs/config.nix; };
+          lean4 = inputs.lean4.packages.${system};
         });
 
       mkNixOsConfiguration = name: { system, config }:
@@ -53,7 +56,7 @@
               nix.extraOptions = builtins.readFile ./nix/nix.conf;
               nix.package = unstable.nixUnstable;
 
-              home-manager.extraSpecialArgs = { inherit inputs; inherit (pkgsBySystem."${system}") unstable; };
+              home-manager.extraSpecialArgs = { inherit inputs; inherit (pkgsBySystem."${system}") unstable lean4; };
             })
             (import config)
           ];
@@ -64,6 +67,7 @@
         nameValuePair name ({ ... }: {
           imports = [
             (import config)
+            inputs.nix-doom-emacs.hmModule
           ];
 
           # For compatibility with nix-shell, nix-build, etc.
@@ -118,7 +122,7 @@
           homeDirectory = if system == "aarch64-darwin" then "/Users/sebastian" else "/home/sebastian";
           pkgs = pkgsBySystem."${system}";
           username = "sebastian";
-          extraSpecialArgs = { inherit name inputs; inherit (pkgsBySystem."${system}") unstable; };
+          extraSpecialArgs = { inherit name inputs; inherit (pkgsBySystem."${system}") unstable lean4; };
         });
     in
     {
