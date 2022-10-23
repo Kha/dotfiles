@@ -83,3 +83,7 @@
 (setq comment-multi-line t)
 
 (setq split-width-threshold 240)
+
+(defun doom-modeline-set-vcs-modeline ()
+  "Set vcs mode-line."
+  (doom-modeline-set-modeline 'vcs))
