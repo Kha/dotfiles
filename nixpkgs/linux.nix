@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     # window manager
-    sway xwayland dmenu i3status mako grim slurp wl-clipboard
+    sway xwayland dmenu i3status grim slurp wl-clipboard
     # system
     pavucontrol xdg_utils (gnome3.adwaita-icon-theme.override { gnome = null; })
     # fonts!
@@ -40,5 +40,10 @@
       # fix locales for Nix on Ubuntu
       LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     };
+  };
+
+  programs.mako = {
+    enable = true;
+    defaultTimeout = 5000;
   };
 }

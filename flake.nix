@@ -7,6 +7,8 @@
     nixos-hardware.url = github:NixOS/nixos-hardware;
     nix-doom-emacs.url = github:nix-community/nix-doom-emacs;
     lean4.url = github:leanprover/lean4;
+    zsh-auto-notify.url = github:MichaelAquilina/zsh-auto-notify;
+    zsh-auto-notify.flake = false;
   };
 
   # based on https://github.com/davidtwco/veritas/blob/master/flake.nix

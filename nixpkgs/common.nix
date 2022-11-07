@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, lean4, ... }:
+{ config, pkgs, unstable, lean4, inputs, ... }:
 
 let
   meld = pkgs.runCommand "${pkgs.meld.name}-wrapped" { buildInputs = [ pkgs.makeWrapper ]; } ''
@@ -123,6 +123,10 @@ in {
       # https://github.com/NixOS/nixpkgs/issues/30121
       setopt prompt_sp
     '';
+    plugins = [{
+      name = "auto-notify";
+      src = inputs.zsh-auto-notify;
+    }];
   };
 
   home.stateVersion = "20.09";
