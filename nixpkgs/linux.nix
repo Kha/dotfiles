@@ -13,7 +13,7 @@
     # dev
     rr
     # other desktop apps
-    firefox chromium unstable.evince thunderbird
+    firefox chromium evince thunderbird
     # Rust all the things
     exa
   ];

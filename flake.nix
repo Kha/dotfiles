@@ -1,8 +1,8 @@
 {
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-22.05;
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-22.11;
     unstable.url = github:NixOS/nixpkgs/nixos-unstable;
-    home-manager.url = github:rycee/home-manager/release-22.05;
+    home-manager.url = github:rycee/home-manager/release-22.11;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = github:NixOS/nixos-hardware;
     nix-doom-emacs.url = github:nix-community/nix-doom-emacs;
@@ -116,14 +116,17 @@
 
       mkHomeManagerHomeConfiguration = name: { system }:
         nameValuePair name (inputs.home-manager.lib.homeManagerConfiguration {
-          inherit system;
-          configuration = { unstable, ... }: {
-            imports = [ self.homeManagerConfigurations."${name}" ];
-            home.packages = [unstable.nixUnstable];
-          };
-          homeDirectory = if system == "aarch64-darwin" then "/Users/sebastian" else "/home/sebastian";
           pkgs = pkgsBySystem."${system}";
-          username = "sebastian";
+          modules = [
+            self.homeManagerConfigurations."${name}"
+            {
+              home = {
+                username = "sebastian";
+                homeDirectory = if system == "aarch64-darwin" then "/Users/sebastian" else "/home/sebastian";
+                packages = [ pkgsBySystem.${system}.unstable.nixUnstable ];
+              };
+            }
+          ];
           extraSpecialArgs = { inherit name inputs; inherit (pkgsBySystem."${system}") unstable lean4; };
         });
     in
