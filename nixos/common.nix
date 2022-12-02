@@ -2,7 +2,7 @@
 
 {
   hardware.enableRedistributableFirmware = true;
-  nix.maxJobs = lib.mkDefault 16;
+  nix.settings.max-jobs = lib.mkDefault 16;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
