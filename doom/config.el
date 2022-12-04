@@ -83,3 +83,6 @@
 (setq comment-multi-line t)
 
 (setq split-width-threshold 240)
+
+;; don't guess
+(setq-default tab-width 2)
