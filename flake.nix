@@ -76,7 +76,7 @@
           home.file.".nixpkgs".source = inputs.nixpkgs;
           home.file.".nixpkgs-unstable".source = inputs.unstable;
           systemd.user.sessionVariables."NIX_PATH" =
-            mkForce "nixpkgs=$HOME/.nixpkgs\:unstable=$HOME/.nixpkgs-unstable:{NIX_PATH:+:}$NIX_PATH";
+            mkForce "nixpkgs=$HOME/.nixpkgs\:unstable=$HOME/.nixpkgs-unstable:$NIX_PATH";
 
           # Re-expose self and nixpkgs as flakes.
           xdg.configFile."nix/registry.json".text = builtins.toJSON {
