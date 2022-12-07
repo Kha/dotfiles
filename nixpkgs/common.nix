@@ -129,5 +129,7 @@ in {
     }];
   };
 
+  programs.nix-index.enable = true;
+
   home.stateVersion = "20.09";
 }
