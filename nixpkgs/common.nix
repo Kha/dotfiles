@@ -13,9 +13,9 @@ in {
     # fonts!
     emacs-all-the-icons-fonts
     # editing
-    ispell vim_configurable
+    ispell vim_configurable unstable.vscode
     # dev
-    gitAndTools.gh gitAndTools.tig gdb meld python3 binutils jq
+    gitAndTools.gh gitAndTools.tig gdb meld python3 binutils jq elan
     # other cli apps
     fasd htop mpv file unzip psmisc libnotify
     # Rust all the things
