@@ -8,7 +8,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.tmpOnTmpfs = true;
+  boot.tmp.useTmpfs = true;
 
   boot.kernel.sysctl."kernel.sysrq" = 1;  # enable all sysrqs
 

@@ -140,7 +140,7 @@ in {
       p = "noglob p";
     };
     initExtra = ''
-      p() ${pkgs.python}/bin/python -c "from math import *; print($*);"
+      p() ${pkgs.python3}/bin/python -c "from math import *; print($*);"
       export PATH=$PATH:~/bin
       # https://github.com/NixOS/nixpkgs/issues/30121
       setopt prompt_sp
