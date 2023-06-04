@@ -39,6 +39,10 @@
   networking.interfaces.enp5s0.useDHCP = true;
   networking.interfaces.wlp3s0.useDHCP = true;
 
+  services.upower.enable = true;
+  services.upower.criticalPowerAction = "Hibernate";
+  services.logind.lidSwitch = "hibernate";
+  services.logind.extraConfig = "HandlePowerKey=ignore";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
