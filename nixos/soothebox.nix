@@ -34,6 +34,7 @@
   networking.interfaces.enp6s0.useDHCP = true;
 
   services.xserver.videoDrivers = [ "nvidia" ];
+  environment.systemPackages = with pkgs; [ xclip scrot ];
   hardware.nvidia = {
     modesetting.enable = true;
     open = true;
