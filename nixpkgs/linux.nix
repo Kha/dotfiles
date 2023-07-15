@@ -1,9 +1,9 @@
-{ config, lib, pkgs, unstable, ... }:
+{ config, lib, pkgs, unstable, inputs, ... }:
 
 {
   home.packages = with pkgs; [
     # window manager
-    sway xwayland dmenu i3status grim slurp wl-clipboard
+    wofi dmenu grim slurp wl-clipboard
     # system
     pavucontrol xdg_utils (gnome3.adwaita-icon-theme.override { gnome = null; })
     # fonts!
@@ -18,6 +18,17 @@
     exa
   ];
 
+  wayland.windowManager.hyprland = {
+    enable = true;
+    extraConfig = builtins.readFile ../hypr/hyprland.conf.extra;
+    plugins = [ inputs.hy3.packages.x86_64-linux.hy3 ];
+  };
+
+  programs.waybar = {
+    package = unstable.waybar;
+    enable = true;
+    systemd.enable = true;
+  };
   gtk.enable = true;
   fonts.fontconfig.enable = true;
 

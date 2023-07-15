@@ -9,7 +9,11 @@
     lean4.url = github:leanprover/lean4;
     zsh-auto-notify.url = github:MichaelAquilina/zsh-auto-notify;
     zsh-auto-notify.flake = false;
+    hyprland.url = "github:hyprwm/Hyprland";
+    hy3.url = "github:outfoxxed/hy3";
+    hy3.inputs.hyprland.follows = "hyprland";
   };
+
 
   # based on https://github.com/davidtwco/veritas/blob/master/flake.nix
   outputs = { self, ... } @ inputs:
@@ -70,6 +74,7 @@
           imports = [
             (import config)
             inputs.nix-doom-emacs.hmModule
+            inputs.hyprland.homeManagerModules.default
           ];
 
           # For compatibility with nix-shell, nix-build, etc.
