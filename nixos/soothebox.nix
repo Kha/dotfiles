@@ -34,7 +34,15 @@
   networking.interfaces.enp6s0.useDHCP = true;
 
   services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.enable = true;
+  services.xserver.windowManager.i3.enable = true;
+  services.xserver.displayManager.startx.enable = true;
   environment.systemPackages = with pkgs; [ xclip scrot ];
+  services.xserver.screenSection = ''
+    Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
+    Option         "AllowIndirectGLXProtocol" "off"
+    Option         "TripleBuffer" "on"
+  '';
   hardware.nvidia = {
     modesetting.enable = true;
     open = true;
