@@ -52,6 +52,10 @@
     "w /sys/power/image_size - - - - 5000000"
   ];
 
+  services.logind.extraConfig = ''
+    HandlePowerKey=suspend
+  '';
+
 
   security.sudo.wheelNeedsPassword = false;
 
