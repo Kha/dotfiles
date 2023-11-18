@@ -49,7 +49,7 @@
   };
 
   systemd.tmpfiles.rules = [
-    "w /sys/power/image_size - - - - 5000000"
+    "w /sys/power/image_size - - - - 15000000"
   ];
 
   services.logind.extraConfig = ''

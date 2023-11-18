@@ -8,6 +8,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Mostly disable swap
+  boot.kernel.sysctl."vm.swappiness" = 1;
+
   boot.tmp.useTmpfs = true;
 
   boot.kernel.sysctl."kernel.sysrq" = 1;  # enable all sysrqs
