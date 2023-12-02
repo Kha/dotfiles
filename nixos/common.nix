@@ -139,6 +139,8 @@
     extraGroups = [ "wheel" "networkmanager" "video" ];
   };
 
+  security.sudo.wheelNeedsPassword = false;
+
   documentation.dev.enable = true;
 
   home-manager = {

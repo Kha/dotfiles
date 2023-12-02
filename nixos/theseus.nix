@@ -4,15 +4,19 @@
   imports = [
     ./common.nix
     inputs.home-manager.nixosModules.home-manager
+    inputs.nixos-hardware.nixosModules.framework-13-7040-amd
   ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  hardware.cpu.amd.updateMicrocode = true;
+
+  # from hardware-config
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/470e6a20-52c5-4447-8064-ec01c95adad3";
+    { device = "/dev/disk/by-label/nixos";
       fsType = "btrfs";
     };
 
@@ -25,37 +29,20 @@
     [ { device = "/dev/disk/by-label/swap"; }
     ];
 
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  # tlp enabled by nixos-hardware
+  services.tlp.settings.START_CHARGE_THRESH_BAT0 = 75;
+  services.tlp.settings.STOP_CHARGE_THRESH_BAT0 = 80;
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.enp6s0.useDHCP = true;
+  networking.interfaces.wlp1s0.useDHCP = true;
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-  services.xserver.enable = true;
-  services.xserver.windowManager.i3.enable = true;
-  services.xserver.displayManager.startx.enable = true;
-  environment.systemPackages = with pkgs; [ xclip scrot ];
-  services.xserver.screenSection = ''
-    Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
-    Option         "AllowIndirectGLXProtocol" "off"
-    Option         "TripleBuffer" "on"
-  '';
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = true;
-  };
-
-  systemd.tmpfiles.rules = [
-    "w /sys/power/image_size - - - - 15000000"
-  ];
-
-  services.logind.extraConfig = ''
-    HandlePowerKey=suspend
-  '';
-
+  services.upower.enable = true;
+  services.upower.criticalPowerAction = "Hibernate";
+  services.logind.lidSwitch = "suspend-then-hibernate";
+  services.logind.extraConfig = "HandlePowerKey=suspend-then-hibernate";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -63,7 +50,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.11"; # Did you read the comment?
+  system.stateVersion = "23.05"; # Did you read the comment?
 
 }
-

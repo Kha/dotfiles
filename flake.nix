@@ -137,6 +137,8 @@
       homeManagerConfigurations = mapAttrs' mkHomeManagerConfiguration {
         wandersail = { system = "x86_64-linux"; config = ./nixpkgs/wandersail.nix; };
 
+        theseus = { system = "x86_64-linux"; config = ./nixpkgs/wandersail.nix; };
+
         soothebox = { system = "x86_64-linux"; config = ./nixpkgs/wandersail.nix; };
 
         "sebastian@i44pc27.informatik.kit.edu" = { system = "x86_64-linux"; config = ./nixpkgs/i44pc65.nix; };
@@ -154,6 +156,8 @@
       # on those hosts.
       nixosConfigurations = mapAttrs' mkNixOsConfiguration {
         wandersail = { system = "x86_64-linux"; config = ./nixos/wandersail.nix; };
+
+        theseus = { system = "x86_64-linux"; config = ./nixos/theseus.nix; };
 
         soothebox = { system = "x86_64-linux"; config = ./nixos/soothebox.nix; };
       };
