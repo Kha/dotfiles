@@ -1,8 +1,8 @@
 {
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-23.05;
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-23.11;
     unstable.url = github:NixOS/nixpkgs/nixos-unstable;
-    home-manager.url = github:rycee/home-manager/release-23.05;
+    home-manager.url = github:rycee/home-manager/release-23.11;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = github:NixOS/nixos-hardware;
     nix-doom-emacs.url = github:nix-community/nix-doom-emacs;

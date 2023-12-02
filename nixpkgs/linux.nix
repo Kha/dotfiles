@@ -14,8 +14,6 @@
     rr
     # other desktop apps
     firefox chromium evince thunderbird
-    # Rust all the things
-    exa
   ];
 
   gtk.enable = true;
@@ -31,9 +29,6 @@
   };
 
   programs.zsh = {
-    shellAliases = {
-      ls = "exa";
-    };
     sessionVariables = {
       # fix Java programs on sway
       _JAVA_AWT_WM_NONREPARENTING = 1;
