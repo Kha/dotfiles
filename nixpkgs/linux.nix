@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     # window manager
     sway xwayland dmenu i3status grim slurp wl-clipboard
+    fuzzel waybar font-awesome
     # system
     pavucontrol xdg_utils (gnome3.adwaita-icon-theme.override { gnome = null; })
     # fonts!
