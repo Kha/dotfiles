@@ -1,0 +1,104 @@
+{
+    "keyboard.dispatch": "keyCode",
+    "editor.fontFamily": "Iosevka, 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "workbench.colorTheme": "Solarized Light",
+    "workbench.colorCustomizations": {
+      "[Solarized Light]": {"editor.selectionHighlightBackground": "#e9dcc5"}
+    },
+    "editor.semanticTokenColorCustomizations": {
+      "[Solarized Light]": {"rules": {"function": "#c1892f"}}
+    },
+    "editor.guides.indentation": false,
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "vim.easymotion": true,
+    "vim.useSystemClipboard": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+      {
+        "before": [
+          "<space>"
+        ],
+        "commands": [
+          "vspacecode.space"
+        ]
+      },
+      {
+        "before": [
+          ","
+        ],
+        "commands": [
+          "vspacecode.space",
+          {
+            "command": "whichkey.triggerKey",
+            "args": "m"
+          }
+        ]
+      }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+      {
+        "before": [
+          "<space>"
+        ],
+        "commands": [
+          "vspacecode.space"
+        ]
+      },
+      {
+        "before": [
+          ","
+        ],
+        "commands": [
+          "vspacecode.space",
+          {
+            "command": "whichkey.triggerKey",
+            "args": "m"
+          }
+        ]
+      }
+    ],
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.minimap.enabled": false,
+    "git.openRepositoryInParentFolders": "never",
+    "vim.handleKeys": {
+      "<C-p>": false,
+      "<C-d>": true,
+      "<C-s>": false,
+      "<C-z>": false,
+      "<C-f>": false
+    },
+    "search.useParentIgnoreFiles": true,
+    "extensions.ignoreRecommendations": true,
+    "editor.fontSize": 12,
+    "workbench.activityBar.visible": false,
+    "whichkey.delay": 200,
+    "vspacecode.bindingOverrides": [
+      {
+        "keys": "n",
+        "name": "Notifications",
+        "type": "bindings",
+        "bindings": [
+          {
+            "key": "a",
+            "name": "Accept notification primary action",
+            "type": "command",
+            "command": "notification.acceptPrimaryAction",
+          },
+          {
+            "key": "c",
+            "name": "Clear all notifications",
+            "type": "command",
+            "command": "notifications.clearAll",
+          }
+        ]
+      }
+    ],
+    "window.menuBarVisibility": "toggle",
+    "chronicler.ffmpeg-binary": "/nix/store/1b2hmf01dinyf2jrjaqgjnyinp7lad1q-ffmpeg-5.1.3-bin/bin/ffmpeg",
+    "editor.rulers": [
+      100
+    ],
+    //"lean4.trace.server": "verbose",
+  }
