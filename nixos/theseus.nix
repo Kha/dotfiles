@@ -15,6 +15,8 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;  # for a while?
+
   fileSystems."/" =
     { device = "/dev/disk/by-label/nixos";
       fsType = "btrfs";
@@ -29,10 +31,6 @@
     [ { device = "/dev/disk/by-label/swap"; }
     ];
 
-  # tlp enabled by nixos-hardware
-  services.tlp.settings.START_CHARGE_THRESH_BAT0 = 75;
-  services.tlp.settings.STOP_CHARGE_THRESH_BAT0 = 80;
-
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
@@ -42,7 +40,47 @@
   services.upower.enable = true;
   services.upower.criticalPowerAction = "Hibernate";
   services.logind.lidSwitch = "suspend-then-hibernate";
-  services.logind.extraConfig = "HandlePowerKey=suspend-then-hibernate";
+  services.logind.powerKey = "suspend-then-hibernate";
+  systemd.sleep.extraConfig = "HibernateDelaySec=4h";
+
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="serio", DRIVERS=="atkbd", ATTR{power/wakeup}="disabled"
+  '';
+
+  hardware.opengl.extraPackages = with pkgs; [
+    amdvlk
+    # encoding/decoding acceleration
+    libvdpau-va-gl vaapiVdpau
+  ];
+
+  xdg.portal = {
+    enable = true;
+    config.common.default = ["gnome"];
+    extraPortals = [pkgs.xdg-desktop-portal-gnome];
+  };
+
+  programs.niri.enable = true;
+  programs.niri.package = pkgs.niri-unstable;
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  #systemd.user.services.niri = {
+  #  unitConfig = {
+  #    BindsTo = "graphical-session.target";
+  #    Before = "graphical-session.target";
+  #    Wants = ["graphical-session-pre.target" "xdg-desktop-autostart.target"];
+  #    After = ["graphical-session-pre.target" "xdg-desktop-autostart.target"];
+  #  };
+  #  serviceConfig = {
+  #    Type = "notify";
+  #    ExecStart = "/home/sebastian/lib/niri/result/bin/niri";
+  #  };
+  #  path = ["/run/wrappers/bin:/home/sebastian/.nix-profile/bin:/nix/profile/bin:/home/sebastian/.local/state/nix/profile/bin:/etc/profiles/per-user/sebastian/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/home/sebastian/.zsh/plugins/auto-notify:/home/sebastian/bin"];
+  #};
+
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  services.blueman.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

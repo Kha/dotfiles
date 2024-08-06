@@ -56,10 +56,6 @@
 ;(package! s)
 ;(package! lsp-mode)
 
-(package! lean4-mode :recipe
-  (:host github
-   :repo "leanprover/lean4-mode"))
-
 ;(package! evil-god-state)
 
 ;(package! lsp-mode :pin "52048d4") ; 2021-06-18

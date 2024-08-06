@@ -1,6 +1,5 @@
 {
     "keyboard.dispatch": "keyCode",
-    "editor.fontFamily": "Iosevka, 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "workbench.colorTheme": "Solarized Light",
     "workbench.colorCustomizations": {
       "[Solarized Light]": {"editor.selectionHighlightBackground": "#e9dcc5"}
@@ -71,8 +70,6 @@
     },
     "search.useParentIgnoreFiles": true,
     "extensions.ignoreRecommendations": true,
-    "editor.fontSize": 12,
-    "workbench.activityBar.visible": false,
     "whichkey.delay": 200,
     "vspacecode.bindingOverrides": [
       {
@@ -93,12 +90,138 @@
             "command": "notifications.clearAll",
           }
         ]
-      }
+      },
+      {
+        "keys": "m.languageId:lean4",
+        "name": "Lean 4",
+        "type": "bindings",
+        "bindings": [
+          {
+            "key": "r",
+            "name": "Refresh File Dependencies",
+            "type": "command",
+            "command": "lean4.refreshFileDependencies",
+          },
+          {
+            "key": "R",
+            "name": "Restart Server",
+            "type": "command",
+            "command": "lean4.restartServer",
+          },
+          {
+            "key": "i",
+            "name": "+Infoview",
+            "type": "bindings",
+            "bindings": [
+              {
+                "name": "Toggle Infoview",
+                "type": "command",
+                "command": "lean4.toggleInfoview",
+              }
+            ],
+          },
+          {
+            "key": "g",
+            "name": "+Go to",
+            "icon": "go-to-file",
+            "type": "bindings",
+            "bindings": [
+              {
+                "key": "d",
+                "name": "Go to definition",
+                "icon": "symbol-function",
+                "type": "command",
+                "command": "editor.action.revealDefinition"
+              },
+              {
+                "key": "g",
+                "name": "Go to definition",
+                "icon": "symbol-function",
+                "type": "command",
+                "command": "editor.action.revealDefinition"
+              },
+              {
+                "key": "h",
+                "name": "Show call hierarchy",
+                "icon": "type-hierarchy",
+                "type": "command",
+                "command": "references-view.showCallHierarchy"
+              },
+              {
+                "key": "r",
+                "name": "Go to references",
+                "icon": "symbol-reference",
+                "type": "command",
+                "command": "editor.action.goToReferences"
+              },
+              {
+                "key": "t",
+                "name": "Go to type definition",
+                "icon": "symbol-struct",
+                "type": "command",
+                "command": "editor.action.goToTypeDefinition"
+              },
+              {
+                "key": "R",
+                "name": "Find references",
+                "icon": "symbol-reference",
+                "type": "command",
+                "command": "references-view.findReferences"
+              },
+            ]
+          },
+        ],
+      },
     ],
-    "window.menuBarVisibility": "toggle",
     "chronicler.ffmpeg-binary": "/nix/store/1b2hmf01dinyf2jrjaqgjnyinp7lad1q-ffmpeg-5.1.3-bin/bin/ffmpeg",
     "editor.rulers": [
       100
     ],
+    "editor.fontFamily": "Iosevka",
+    "editor.fontSize": 13,
+    "explorer.confirmDelete": false,
+    // https://github.com/microsoft/vscode/issues/184124
+    "window.titleBarStyle": "custom",
+    "workbench.editor.empty.hint": "hidden",
+    "gitlens.ai.experimental.provider": "openai",
+    "gitlens.ai.experimental.openai.model": "gpt-4-1106-preview",
+    "gitlens.advanced.messages": {
+      "suppressCommitHasNoPreviousCommitWarning": true,
+      "suppressCreatePullRequestPrompt": true
+    },
+    "window.zoomLevel": 1,
+    "editor.stickyScroll.enabled": true,
+    "editor.stickyTabStops": true,
+    "githubPullRequests.pullBranch": "never",
+    "cSpell.enableFiletypes": [
+      "lean4"
+    ],
+    "cSpell.userWords": [
+      "builtins",
+      "Carneiro",
+      "definitionally",
+      "incrementality",
+      "Mathlib",
+      "Moura",
+      "mvar",
+      "Nawrocki",
+      "subgoals",
+      "Ullrich",
+      "Wojciech"
+    ],
+    "cSpell.checkOnlyEnabledFileTypes": false,
+    "cSpell.includeRegExpList": [
+      "/--.*/",
+      "/\\/-(.|\\n)*?-\\//",
+      //"string"
+    ],
+    "diffEditor.ignoreTrimWhitespace": false,
+    "github.copilot.editor.enableAutoCompletions": true,
+    "lean4.showSetupWarnings": false,
+    "gitlens.launchpad.indicator.enabled": false,
+    "git.replaceTagsWhenPull": true,
+    "git.untrackedChanges": "separate",
+    "githubPullRequests.createOnPublishBranch": "never",
+    "git.autofetch": "all",
     //"lean4.trace.server": "verbose",
   }

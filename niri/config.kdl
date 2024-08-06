@@ -30,8 +30,17 @@ input {
     // Omitting settings disables them, or leaves them at their default values.
     touchpad {
         tap
+        // dwt
         natural-scroll
         // accel-speed 0.2
+        // accel-profile "flat"
+        // tap-button-map "left-middle-right"
+    }
+
+    mouse {
+        // natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
     }
 
     tablet {
@@ -40,12 +49,27 @@ input {
         // existing outputs.
         map-to-output "eDP-1"
     }
+
+    // By default, niri will take over the power button to make it sleep
+    // instead of power off.
+    // Uncomment this if you would like to configure the power button elsewhere
+    // (i.e. logind.conf).
+    // disable-power-key-handling
+
+    // Uncomment this to enable workspace auto-back-and-forth.
+    // If enabled, switching to the same workspace by index twice will switch back to the
+    // previous workspace.
+    workspace-auto-back-and-forth
 }
 
-// You can configure outputs by their name, which you can find with wayland-info(1).
+// You can configure outputs by their name, which you can find
+// by running `niri msg outputs` while inside a niri instance.
 // The built-in laptop monitor is usually called "eDP-1".
 // Remember to uncommend the node by removing "/-"!
-output "eDP-1" {
+/-output "eDP-1" {
+    // Uncomment this line to disable this output.
+    // off
+
     // Scale is a floating-point number, but at the moment only integer values work.
     scale 1.0
 
@@ -54,8 +78,8 @@ output "eDP-1" {
     // If the refresh rate is omitted, niri will pick the highest refresh rate
     // for the resolution.
     // If the mode is omitted altogether or is invalid, niri will pick one automatically.
-    // All valid modes are listed in niri's debug output when an output is connected.
-    //mode "1920x1080@144"
+    // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
+    mode "1920x1080@144"
 
     // Position of the output in the global coordinate space.
     // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
@@ -66,7 +90,76 @@ output "eDP-1" {
     // so to put another output directly adjacent to it on the right, set its x to 1920.
     // It the position is unset or results in an overlap, the output is instead placed
     // automatically.
-    //position x=1280 y=0
+    position x=1280 y=0
+}
+
+layout {
+    // You can change how the focus ring looks.
+    focus-ring {
+        // Uncomment this line to disable the focus ring.
+        // off
+
+        // How many logical pixels the ring extends out from the windows.
+        width 4
+
+        // Color of the ring on the active monitor: red, green, blue, alpha.
+        active-color 127 200 255 255
+
+        // Color of the ring on inactive monitors: red, green, blue, alpha.
+        inactive-color 80 80 80 255
+    }
+
+    // You can also add a border. It's similar to the focus ring, but always visible.
+    border {
+        // The settings are the same as for the focus ring.
+        // If you enable the border, you probably want to disable the focus ring.
+        off
+
+        width 4
+        active-color 255 200 127 255
+        inactive-color 80 80 80 255
+    }
+
+    // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
+    preset-column-widths {
+        // Proportion sets the width as a fraction of the output width, taking gaps into account.
+        // For example, you can perfectly fit four windows sized "proportion 0.25" on an output.
+        // The default preset widths are 1/3, 1/2 and 2/3 of the output.
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+
+        // Fixed sets the width in logical pixels exactly.
+        // fixed 1920
+    }
+
+    // You can change the default width of the new windows.
+    default-column-width { proportion 0.5; }
+    // If you leave the brackets empty, the windows themselves will decide their initial width.
+    // default-column-width {}
+
+    // Set gaps around windows in logical pixels.
+    gaps 16
+
+    // Struts shrink the area occupied by windows, similarly to layer-shell panels.
+    // You can think of them as a kind of outer gaps. They are set in logical pixels.
+    // Left and right struts will cause the next window to the side to always be visible.
+    // Top and bottom struts will simply add outer gaps in addition to the area occupied by
+    // layer-shell panels and regular gaps.
+    struts {
+        // left 64
+        // right 64
+        // top 64
+        // bottom 64
+    }
+
+    // When to center a column when changing focus, options are:
+    // - "never", default behavior, focusing an off-screen column will keep at the left
+    //   or right edge of the screen.
+    // - "on-overflow", focusing a column will center it if it doesn't fit
+    //   together with the previously focused column.
+    // - "always", the focused column will always be centered.
+    center-focused-column "never"
 }
 
 // Add lines like this to spawn processes at startup.
@@ -76,21 +169,6 @@ output "eDP-1" {
 spawn-at-startup "alacritty"
 spawn-at-startup "waybar"
 spawn-at-startup "mako"
-
-// You can change how the focus ring looks.
-focus-ring {
-    // Uncomment this line to disable the focus ring.
-    // off
-
-    // How many logical pixels the ring extends out from the windows.
-    width 4
-
-    // Color of the ring on the active monitor: red, green, blue, alpha.
-    active-color 127 200 255 255
-
-    // Color of the ring on inactive monitors: red, green, blue, alpha.
-    inactive-color 80 80 80 255
-}
 
 cursor {
     // Change the theme and size of the cursor as well as set the
@@ -104,27 +182,6 @@ cursor {
 // Additionally, clients will be informed that they are tiled, removing some rounded corners.
 prefer-no-csd
 
-// You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
-preset-column-widths {
-    // Proportion sets the width as a fraction of the output width, taking gaps into account.
-    // For example, you can perfectly fit four windows sized "proportion 0.25" on an output.
-    // The default preset widths are 1/3, 1/2 and 2/3 of the output.
-    proportion 0.333
-    proportion 0.5
-    proportion 0.667
-
-    // Fixed sets the width in logical pixels exactly.
-    // fixed 1920
-}
-
-// You can change the default width of the new windows.
-default-column-width { proportion 0.5; }
-// If you leave the brackets empty, the windows themselves will decide their initial width.
-// default-column-width {}
-
-// Set gaps around windows in logical pixels.
-gaps 16
-
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
 // The path is formatted with strftime(3) to give you the screenshot date and time.
@@ -132,6 +189,12 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 // You can also set this to null to disable saving screenshots to disk.
 // screenshot-path null
+
+// Settings for the "Important Hotkeys" overlay.
+hotkey-overlay {
+    // Uncomment this line if you don't want to see the hotkey help at niri startup.
+    // skip-at-startup
+}
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -141,11 +204,19 @@ binds {
     // "Mod" is a special modifier equal to Super when running on a TTY, and to Alt
     // when running as a winit window.
 
+    // Mod-Shift-/, which is usually the same as Mod-?,
+    // shows a list of important hotkeys.
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return { spawn "alacritty"; }
     Mod+D { spawn "fuzzel"; }
     Mod+Alt+L { spawn "swaylock"; }
 
+    // You can also use a shell:
+    // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
+
+    // Example volume keys mappings for PipeWire & WirePlumber.
     XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
     XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
     XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
@@ -154,55 +225,75 @@ binds {
 
     Mod+Q { close-window; }
 
-    Mod+H     { focus-column-left; }
-    Mod+J     { focus-window-down; }
-    Mod+K     { focus-window-up; }
-    Mod+L     { focus-column-right; }
     Mod+Left  { focus-column-left; }
     Mod+Down  { focus-window-down; }
     Mod+Up    { focus-window-up; }
     Mod+Right { focus-column-right; }
+    Mod+H     { focus-column-left; }
+    Mod+J     { focus-window-down; }
+    Mod+K     { focus-window-up; }
+    Mod+L     { focus-column-right; }
 
-    Mod+Ctrl+H     { move-column-left; }
-    Mod+Ctrl+J     { move-window-down; }
-    Mod+Ctrl+K     { move-window-up; }
-    Mod+Ctrl+L     { move-column-right; }
     Mod+Ctrl+Left  { move-column-left; }
     Mod+Ctrl+Down  { move-window-down; }
     Mod+Ctrl+Up    { move-window-up; }
     Mod+Ctrl+Right { move-column-right; }
+    Mod+Ctrl+H     { move-column-left; }
+    Mod+Ctrl+J     { move-window-down; }
+    Mod+Ctrl+K     { move-window-up; }
+    Mod+Ctrl+L     { move-column-right; }
 
-    Mod+Shift+H     { focus-monitor-left; }
-    Mod+Shift+J     { focus-monitor-down; }
-    Mod+Shift+K     { focus-monitor-up; }
-    Mod+Shift+L     { focus-monitor-right; }
+    // Alternative commands that move across workspaces when reaching
+    // the first or last window in a column.
+    // Mod+J     { focus-window-or-workspace-down; }
+    // Mod+K     { focus-window-or-workspace-up; }
+    // Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
+    // Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
+
+    Mod+Home { focus-column-first; }
+    Mod+End  { focus-column-last; }
+    Mod+Ctrl+Home { move-column-to-first; }
+    Mod+Ctrl+End  { move-column-to-last; }
+
     Mod+Shift+Left  { focus-monitor-left; }
     Mod+Shift+Down  { focus-monitor-down; }
     Mod+Shift+Up    { focus-monitor-up; }
     Mod+Shift+Right { focus-monitor-right; }
+    Mod+Shift+H     { focus-monitor-left; }
+    Mod+Shift+J     { focus-monitor-down; }
+    Mod+Shift+K     { focus-monitor-up; }
+    Mod+Shift+L     { focus-monitor-right; }
 
-    Mod+Shift+Ctrl+H     { move-window-to-monitor-left; }
-    Mod+Shift+Ctrl+J     { move-window-to-monitor-down; }
-    Mod+Shift+Ctrl+K     { move-window-to-monitor-up; }
-    Mod+Shift+Ctrl+L     { move-window-to-monitor-right; }
-    Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
-    Mod+Shift+Ctrl+Down  { move-window-to-monitor-down; }
-    Mod+Shift+Ctrl+Up    { move-window-to-monitor-up; }
-    Mod+Shift+Ctrl+Right { move-window-to-monitor-right; }
+    //Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    //Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+    //Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+    //Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+    Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
 
-    Mod+U              { focus-workspace-down; }
-    Mod+I              { focus-workspace-up; }
+    Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
+    Mod+Shift+Ctrl+Right  { move-workspace-to-monitor-right; }
+    // ...
+
     Mod+Page_Down      { focus-workspace-down; }
     Mod+Page_Up        { focus-workspace-up; }
-    Mod+Ctrl+U         { move-window-to-workspace-down; }
-    Mod+Ctrl+I         { move-window-to-workspace-up; }
-    Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
-    Mod+Ctrl+Page_Up   { move-window-to-workspace-up; }
+    Mod+U              { focus-workspace-down; }
+    Mod+I              { focus-workspace-up; }
+    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
+    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
+    Mod+Ctrl+U         { move-column-to-workspace-down; }
+    Mod+Ctrl+I         { move-column-to-workspace-up; }
 
-    Mod+Shift+U         { move-workspace-down; }
-    Mod+Shift+I         { move-workspace-up; }
+    // Alternatively, there are commands to move just a single window:
+    // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
+    // ...
+
     Mod+Shift+Page_Down { move-workspace-down; }
     Mod+Shift+Page_Up   { move-workspace-up; }
+    Mod+Shift+U         { move-workspace-down; }
+    Mod+Shift+I         { move-workspace-up; }
 
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
@@ -213,15 +304,18 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
-    Mod+Ctrl+1 { move-window-to-workspace 1; }
-    Mod+Ctrl+2 { move-window-to-workspace 2; }
-    Mod+Ctrl+3 { move-window-to-workspace 3; }
-    Mod+Ctrl+4 { move-window-to-workspace 4; }
-    Mod+Ctrl+5 { move-window-to-workspace 5; }
-    Mod+Ctrl+6 { move-window-to-workspace 6; }
-    Mod+Ctrl+7 { move-window-to-workspace 7; }
-    Mod+Ctrl+8 { move-window-to-workspace 8; }
-    Mod+Ctrl+9 { move-window-to-workspace 9; }
+    Mod+Ctrl+1 { move-column-to-workspace 1; }
+    Mod+Ctrl+2 { move-column-to-workspace 2; }
+    Mod+Ctrl+3 { move-column-to-workspace 3; }
+    Mod+Ctrl+4 { move-column-to-workspace 4; }
+    Mod+Ctrl+5 { move-column-to-workspace 5; }
+    Mod+Ctrl+6 { move-column-to-workspace 6; }
+    Mod+Ctrl+7 { move-column-to-workspace 7; }
+    Mod+Ctrl+8 { move-column-to-workspace 8; }
+    Mod+Ctrl+9 { move-column-to-workspace 9; }
+
+    // Alternatively, there are commands to move just a single window:
+    // Mod+Ctrl+1 { move-window-to-workspace 1; }
 
     Mod+Comma  { consume-window-into-column; }
     Mod+Period { expel-window-from-column; }
@@ -262,4 +356,31 @@ binds {
     Mod+Shift+P { power-off-monitors; }
 
     Mod+Shift+Ctrl+T { toggle-debug-tint; }
+}
+
+// Settings for debugging. Not meant for normal use.
+// These can change or stop working at any point with little notice.
+debug {
+    // Make niri take over its DBus services even if it's not running as a session.
+    // Useful for testing screen recording changes without having to relogin.
+    // The main niri instance will *not* currently take back the services; so you will
+    // need to relogin in the end.
+    // dbus-interfaces-in-non-session-instances
+
+    // Wait until every frame is done rendering before handing it over to DRM.
+    // wait-for-frame-completion-before-queueing
+
+    // Enable direct scanout into overlay planes.
+    // May cause frame drops during some animations on some hardware.
+    // enable-overlay-planes
+
+    // Disable the use of the cursor plane.
+    // The cursor will be rendered together with the rest of the frame.
+    // disable-cursor-plane
+
+    // Slow down animations by this factor.
+    // animation-slowdown 3.0
+
+    // Override the DRM device that niri will use for all rendering.
+    // render-drm-device "/dev/dri/renderD129"
 }

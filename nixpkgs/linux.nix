@@ -14,7 +14,7 @@
     # dev
     rr
     # other desktop apps
-    firefox chromium evince thunderbird
+    firefox-beta chromium evince thunderbird
   ];
 
   gtk.enable = true;

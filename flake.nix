@@ -1,14 +1,17 @@
 {
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-23.11;
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-24.05;
     unstable.url = github:NixOS/nixpkgs/nixos-unstable;
-    home-manager.url = github:rycee/home-manager/release-23.11;
+    home-manager.url = github:rycee/home-manager/release-24.05;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = github:NixOS/nixos-hardware;
-    nix-doom-emacs.url = github:nix-community/nix-doom-emacs;
-    lean4.url = github:leanprover/lean4;
+    nix-doom-emacs-unstraightened.url = github:marienz/nix-doom-emacs-unstraightened;
+    nix-doom-emacs-unstraightened.inputs.nixpkgs.follows = "";
     zsh-auto-notify.url = github:MichaelAquilina/zsh-auto-notify;
     zsh-auto-notify.flake = false;
+    niri.url = "github:sodiboo/niri-flake";
+    #niri.inputs.niri-src.follows = "niri-src";
+    #niri.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   # based on https://github.com/davidtwco/veritas/blob/master/flake.nix
@@ -22,13 +25,13 @@
           config = import ./nixpkgs/config.nix;
         } // {
           unstable = import inputs.unstable { inherit system; config = import ./nixpkgs/config.nix; };
-          lean4 = inputs.lean4.packages.${system};
         });
 
       mkNixOsConfiguration = name: { system, config }:
         nameValuePair name (nixosSystem {
           inherit system;
           modules = [
+            inputs.niri.nixosModules.niri
             ({ name, ... }: {
               # Set the hostname to the name of the configuration being applied (since the
               # configuration being applied is determined by the hostname).
@@ -36,7 +39,10 @@
             })
             ({ inputs, ... }: {
               # Use the nixpkgs from the flake.
-              nixpkgs = { pkgs = pkgsBySystem."${system}"; };
+              nixpkgs = {
+                pkgs = pkgsBySystem."${system}";
+                overlays = [ inputs.niri.overlays.niri ];
+              };
 
               # For compatibility with nix-shell, nix-build, etc.
               environment.etc.nixpkgs.source = inputs.nixpkgs;
@@ -49,16 +55,17 @@
             ({ inputs, unstable, ... }: {
               # Re-expose self and nixpkgs as flakes.
               nix.registry = {
-                self.flake = inputs.self;
+                # induces unnecessary drv changes
+                #self.flake = inputs.self;
                 nixpkgs = {
                   from = { id = "nixpkgs"; type = "indirect"; };
                   flake = inputs.nixpkgs;
                 };
               };
               nix.extraOptions = builtins.readFile ./nix/nix.conf;
-              nix.package = unstable.nixUnstable;
+              # nix.package = unstable.nixUnstable;
 
-              home-manager.extraSpecialArgs = { inherit inputs; inherit (pkgsBySystem."${system}") unstable lean4; };
+              home-manager.extraSpecialArgs = { inherit inputs; inherit (pkgsBySystem."${system}") unstable; };
             })
             (import config)
           ];
@@ -69,7 +76,7 @@
         nameValuePair name ({ ... }: {
           imports = [
             (import config)
-            inputs.nix-doom-emacs.hmModule
+            inputs.nix-doom-emacs-unstraightened.hmModule
           ];
 
           # For compatibility with nix-shell, nix-build, etc.
@@ -94,10 +101,11 @@
                   );
               in
               [
-                {
-                  from = { id = "self"; type = "indirect"; };
-                  to = toInput inputs.self;
-                }
+                # induces unnecessary drv changes
+                #{
+                #  from = { id = "self"; type = "indirect"; };
+                #  to = toInput inputs.self;
+                #}
                 {
                   from = { id = "nixpkgs"; type = "indirect"; };
                   to = toInput inputs.nixpkgs;
@@ -105,10 +113,6 @@
                 {
                   from = { id = "unstable"; type = "indirect"; };
                   to = toInput inputs.unstable;
-                }
-                {
-                  from = { id = "lean"; type = "indirect"; };
-                  to = { type = "git"; url = "file://${if system == "aarch64-darwin" then "/Users" else "/home"}/sebastian/lean/lean"; };
                 }
               ];
           };
@@ -127,7 +131,7 @@
               };
             }
           ];
-          extraSpecialArgs = { inherit name inputs; inherit (pkgsBySystem."${system}") unstable lean4; };
+          extraSpecialArgs = { inherit name inputs; inherit (pkgsBySystem."${system}") unstable; };
         });
     in
     {

@@ -8,6 +8,12 @@ let
       $out/bin/meld \
       --set GDK_PIXBUF_MODULE_FILE "${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"
   '';
+  elan = pkgs.elan.overrideAttrs {
+    src = pkgs.elan.src.override {
+      rev = "eager-resolution-v2";
+      hash = "sha256-shb1BY6g6l1ZpmnE+xiqAElLOMI2KrpvlxVF3ajbA20=";
+    };
+  };
 in {
   home.packages = with pkgs; [
     # fonts!
@@ -15,7 +21,7 @@ in {
     # editing
     ispell vim_configurable unstable.vscode
     # dev
-    gitAndTools.gh gitAndTools.tig gdb meld python3 binutils jq elan
+    gitAndTools.gh gitAndTools.tig gdb meld python3 binutils jq elan hyperfine samply
     # other cli apps
     fasd htop mpv file unzip psmisc libnotify
     # Rust all the things
@@ -46,6 +52,7 @@ in {
       pull.rebase = "true";
       rebase.autoStash = "true";
       github.user = "Kha";
+      push.autoSetupRemote = "true";
     };
   };
   programs.alacritty = {
@@ -87,32 +94,8 @@ in {
 
   programs.doom-emacs = rec {
     enable = true;
-    doomPrivateDir = ../doom;
-    # Only init/packages so we only rebuild when those change.
-    doomPackageDir = let
-      filteredPath = builtins.path {
-        path = doomPrivateDir;
-        name = "doom-private-dir-filtered";
-        filter = path: type:
-          builtins.elem (baseNameOf path) [ "init.el" "packages.el" ];
-      };
-    in pkgs.linkFarm "doom-packages-dir" [
-      {
-        name = "init.el";
-        path = "${filteredPath}/init.el";
-      }
-      {
-        name = "packages.el";
-        path = "${filteredPath}/packages.el";
-      }
-      {
-        name = "config.el";
-        path = pkgs.emptyFile;
-      }
-    ];
-    emacsPackagesOverlay = self: super: {
-      inherit (lean4) lean4-mode;
-    };
+    doomDir = ../doom;
+    #emacsPackage = pkgs.emacs29-pgtk;
   };
 
   #programs.vscode = {

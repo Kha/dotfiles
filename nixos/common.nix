@@ -48,34 +48,6 @@
   #   pinentryFlavor = "gnome3";
   # };
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  krb5.enable = true;
-  krb5.config = ''
-[libdefaults]
-    default_realm = INFO.UNI-KARLSRUHE.DE
-    clockskew = 300
-
-    kdc_timesync = 1
-    ccache_type = 4
-    forwardable = true
-    proxiable = true
-
-[realms]
-    INFO.UNI-KARLSRUHE.DE = {
-        kdc = kdc1.info.uni-karlsruhe.de.
-        kdc = kdc2.info.uni-karlsruhe.de.
-        default_domain = info.uni-karlsruhe.de
-    }
-
-[domain_realm]
-    .info.uni-karlsruhe.de = INFO.UNI-KARLSRUHE.DE
-    info.uni-karlsruhe.de = INFO.UNI-KARLSRUHE.DE
-'';
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
