@@ -1,0 +1,11 @@
+[experimental-advance-branches]
+enabled-branches = ["glob:*"]
+disabled-branches = ["main", "master", "nightly-with-mathlib", "nightly"]
+
+[user]
+name = "Sebastian Ullrich"
+email = "sebasti@nullri.ch"
+
+[ui]
+diff-editor = ":builtin"
+default-command = "log"
