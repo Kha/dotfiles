@@ -145,15 +145,11 @@
 
         soothebox = { system = "x86_64-linux"; config = ./nixpkgs/wandersail.nix; };
 
-        "sebastian@i44pc27.informatik.kit.edu" = { system = "x86_64-linux"; config = ./nixpkgs/i44pc65.nix; };
-
-        "sebastian@i44mac1.informatik.kit.edu" = { system = "aarch64-darwin"; config = ./nixpkgs/i44mac1.nix; };
+        "sebastian@chonk.lean-fro.org" = { system = "x86_64-linux"; config = ./nixpkgs/chonk.nix; };
       };
 
       homeConfigurations = mapAttrs' mkHomeManagerHomeConfiguration {
-        "sebastian@i44pc27.informatik.kit.edu" = { system = "x86_64-linux"; };
-
-        "sebastian@i44mac1.informatik.kit.edu" = { system = "aarch64-darwin"; };
+        "sebastian@chonk.lean-fro.org" = { system = "x86_64-linux"; };
       };
 
       # Attribute set of hostnames to evaluated NixOS configurations. Consumed by `nixos-rebuild`

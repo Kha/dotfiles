@@ -24,8 +24,8 @@
     enable = true;
     defaultApplications = {
       "application/pdf" = [ "org.gnome.Evince.desktop" ];
-      "x-scheme-handler/http" = [ "firefox.desktop" ];
-      "x-scheme-handler/https" = [ "firefox.desktop" ];
+      "x-scheme-handler/http" = [ "firefox-beta.desktop" ];
+      "x-scheme-handler/https" = [ "firefox-beta.desktop" ];
     };
   };
 

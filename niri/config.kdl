@@ -93,6 +93,10 @@ input {
     position x=1280 y=0
 }
 
+output "eDP-1" {
+    scale 1.2
+}
+
 layout {
     // You can change how the focus ring looks.
     focus-ring {

@@ -8,12 +8,16 @@ let
       $out/bin/meld \
       --set GDK_PIXBUF_MODULE_FILE "${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"
   '';
-  elan = pkgs.elan.overrideAttrs {
+  elan = pkgs.elan.overrideAttrs (oldAttrs: rec {
     src = pkgs.elan.src.override {
-      rev = "eager-resolution-v2";
-      hash = "sha256-shb1BY6g6l1ZpmnE+xiqAElLOMI2KrpvlxVF3ajbA20=";
+      rev = "eager-resolution-v4";
+      hash = "sha256-IS5FhirpWpQU7qdc32iExVEzWM/e+fWqTy9iRj5GfGw=";
     };
-  };
+    cargoDeps = oldAttrs.cargoDeps.overrideAttrs ({
+      inherit src;
+      outputHash = "sha256-aRYnxy5fKpOJryijadyLQzAUYWYLBOcFBnnaXs4sW40=";
+    });
+  });
 in {
   home.packages = with pkgs; [
     # fonts!
@@ -21,7 +25,7 @@ in {
     # editing
     ispell vim_configurable unstable.vscode
     # dev
-    gitAndTools.gh gitAndTools.tig gdb meld python3 binutils jq elan hyperfine samply
+    gitAndTools.gh gitAndTools.tig gdb meld python3 binutils jq elan hyperfine samply unstable.jujutsu
     # other cli apps
     fasd htop mpv file unzip psmisc libnotify
     # Rust all the things

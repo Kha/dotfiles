@@ -215,13 +215,19 @@
       "/\\/-(.|\\n)*?-\\//",
       //"string"
     ],
-    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.ignoreTrimWhitespace": true,
     "github.copilot.editor.enableAutoCompletions": true,
     "lean4.showSetupWarnings": false,
     "gitlens.launchpad.indicator.enabled": false,
     "git.replaceTagsWhenPull": true,
     "git.untrackedChanges": "separate",
     "githubPullRequests.createOnPublishBranch": "never",
-    "git.autofetch": "all",
+    //"git.autofetch": "all",
+    "githubPullRequests.pushBranch": "always",
+    "cSpell.diagnosticLevel": "Hint",
+    "visualjj.refreshInterval": 10,
+    "terminal.integrated.commandsToSkipShell": [
+        "-workbench.action.quickOpen"
+    ],
     //"lean4.trace.server": "verbose",
   }
