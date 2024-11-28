@@ -63,7 +63,6 @@
                 };
               };
               nix.extraOptions = builtins.readFile ./nix/nix.conf;
-              # nix.package = unstable.nixUnstable;
 
               home-manager.extraSpecialArgs = { inherit inputs; inherit (pkgsBySystem."${system}") unstable; };
             })
@@ -127,7 +126,6 @@
               home = {
                 username = "sebastian";
                 homeDirectory = if system == "aarch64-darwin" then "/Users/sebastian" else "/home/sebastian";
-                packages = [ pkgsBySystem.${system}.unstable.nixUnstable ];
               };
             }
           ];

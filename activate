@@ -1,0 +1,1 @@
+nix run --extra-experimental-features 'nix-command flakes' .#homeConfigurations.\"sebastian@$HOSTNAME\".activation-script
