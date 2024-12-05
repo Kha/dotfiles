@@ -43,10 +43,6 @@
   services.logind.powerKey = "suspend-then-hibernate";
   systemd.sleep.extraConfig = "HibernateDelaySec=4h";
 
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="serio", DRIVERS=="atkbd", ATTR{power/wakeup}="disabled"
-  '';
-
   hardware.opengl.extraPackages = with pkgs; [
     amdvlk
     # encoding/decoding acceleration

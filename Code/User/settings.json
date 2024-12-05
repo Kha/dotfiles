@@ -215,7 +215,7 @@
       "/\\/-(.|\\n)*?-\\//",
       //"string"
     ],
-    "diffEditor.ignoreTrimWhitespace": true,
+    "diffEditor.ignoreTrimWhitespace": false,
     "github.copilot.editor.enableAutoCompletions": true,
     "lean4.showSetupWarnings": false,
     "gitlens.launchpad.indicator.enabled": false,
@@ -228,6 +228,33 @@
     "visualjj.refreshInterval": 10,
     "terminal.integrated.commandsToSkipShell": [
         "-workbench.action.quickOpen"
+    ],
+    "terminal.integrated.defaultProfile.linux": "zsh (2)",
+    "terminal.integrated.profiles.linux": {
+      "bash": {
+        "path": "bash",
+        "icon": "terminal-bash"
+      },
+      "zsh": {
+        "path": "zsh"
+      },
+      "fish": {
+        "path": "fish"
+      },
+      "tmux": {
+        "path": "tmux",
+        "icon": "terminal-tmux"
+      },
+      "pwsh": {
+        "path": "pwsh",
+        "icon": "terminal-powershell"
+      },
+      "zsh (2)": {
+        "path": "/usr/bin/zsh"
+      }
+    },
+    "lean4.serverArgs": [
+      ""
     ],
     //"lean4.trace.server": "verbose",
   }
