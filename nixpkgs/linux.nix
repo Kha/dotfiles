@@ -6,7 +6,7 @@
     sway xwayland dmenu i3status grim slurp wl-clipboard
     fuzzel waybar font-awesome
     # system
-    pavucontrol xdg_utils (gnome3.adwaita-icon-theme.override { gnome = null; })
+    pavucontrol xdg-utils (adwaita-icon-theme.override { gnome = null; })
     # fonts!
     iosevka
     # editing

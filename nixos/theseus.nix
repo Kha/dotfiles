@@ -43,7 +43,7 @@
   services.logind.powerKey = "suspend-then-hibernate";
   systemd.sleep.extraConfig = "HibernateDelaySec=4h";
 
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.graphics.extraPackages = with pkgs; [
     amdvlk
     # encoding/decoding acceleration
     libvdpau-va-gl vaapiVdpau

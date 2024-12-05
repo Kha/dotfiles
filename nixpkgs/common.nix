@@ -15,7 +15,7 @@ let
     };
     cargoDeps = oldAttrs.cargoDeps.overrideAttrs ({
       inherit src;
-      outputHash = "sha256-aRYnxy5fKpOJryijadyLQzAUYWYLBOcFBnnaXs4sW40=";
+      outputHash = "sha256-Uq/vHDIai0ucAKxJd7gEwmQj/hpvV01vYxSLZL3gXu4=";
     });
   });
 in {

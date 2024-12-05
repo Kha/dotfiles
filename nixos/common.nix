@@ -35,8 +35,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget vim man-pages
-    alsaUtils pamixer
+    wget vim man-pages pamixer
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
