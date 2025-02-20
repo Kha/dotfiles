@@ -5,4 +5,6 @@
 
   programs.home-manager.enable = true;
   targets.genericLinux.enable = true;
+
+  home.packages = with pkgs; [ nix ];
 }
