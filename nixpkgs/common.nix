@@ -37,7 +37,13 @@ in {
   };
 
   programs.direnv.enable = true;
-  programs.fzf.enable = true;
+  #programs.fzf.enable = true;
+  programs.fzf.package = unstable.fzf;  # https://github.com/junegunn/fzf/issues/1472
+
+  programs.atuin = {
+    enable = true;
+    enableZshIntegration = true;
+  };
   programs.gh = {
     enable = true;
     settings.aliases.co = "pr checkout";
@@ -111,7 +117,6 @@ in {
     enable = true;
     oh-my-zsh = {
       enable = true;
-      plugins = [ "fasd" "per-directory-history" ];
       theme = "agnoster";
     };
     sessionVariables = {
