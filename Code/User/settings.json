@@ -253,8 +253,6 @@
         "path": "/usr/bin/zsh"
       }
     },
-    "lean4.serverArgs": [
-      ""
-    ],
+    "explorer.confirmDragAndDrop": false,
     //"lean4.trace.server": "verbose",
   }

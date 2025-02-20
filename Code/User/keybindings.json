@@ -133,4 +133,9 @@
         "command": "file-browser.stepIn",
         "when": "inFileBrowser"
     },
+    {
+        "key": "ctrl+g",
+        "command": "-workbench.action.terminal.goToRecentDirectory",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
 ]

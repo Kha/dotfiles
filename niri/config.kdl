@@ -227,6 +227,9 @@ binds {
     XF86MonBrightnessDown { spawn "light" "-U" "5"; }
     XF86MonBrightnessUp { spawn "light" "-A" "5"; }
 
+    XF86AudioPause { spawn "playerctl" "play-pause"; }
+    XF86AudioPlay { spawn "playerctl" "play-pause"; }
+
     Mod+Q { close-window; }
 
     Mod+Left  { focus-column-left; }
