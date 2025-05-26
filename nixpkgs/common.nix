@@ -1,31 +1,11 @@
 { config, pkgs, unstable, lean4, inputs, ... }:
 
-let
-  meld = pkgs.runCommand "${pkgs.meld.name}-wrapped" { buildInputs = [ pkgs.makeWrapper ]; } ''
-    cp -r ${pkgs.meld} $out
-    chmod u+w $out/bin $out/bin/meld
-    makeWrapper ${pkgs.meld}/bin/meld \
-      $out/bin/meld \
-      --set GDK_PIXBUF_MODULE_FILE "${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"
-  '';
-  elan = pkgs.elan.overrideAttrs (oldAttrs: rec {
-    src = pkgs.elan.src.override {
-      rev = "eager-resolution-v4";
-      hash = "sha256-IS5FhirpWpQU7qdc32iExVEzWM/e+fWqTy9iRj5GfGw=";
-    };
-    cargoDeps = oldAttrs.cargoDeps.overrideAttrs ({
-      inherit src;
-      outputHash = "sha256-Uq/vHDIai0ucAKxJd7gEwmQj/hpvV01vYxSLZL3gXu4=";
-    });
-  });
-in {
+{
   home.packages = with pkgs; [
-    # fonts!
-    emacs-all-the-icons-fonts
     # editing
     ispell vim_configurable unstable.vscode
     # dev
-    gitAndTools.gh gitAndTools.tig gdb meld python3 binutils jq elan hyperfine samply unstable.jujutsu
+    gitAndTools.gh gitAndTools.tig gdb meld python3 binutils jq unstable.elan hyperfine samply unstable.jujutsu
     # other cli apps
     fasd htop mpv file unzip psmisc libnotify
     # Rust all the things
@@ -104,12 +84,6 @@ in {
     };
   };
 
-  programs.doom-emacs = rec {
-    enable = true;
-    doomDir = ../doom;
-    #emacsPackage = pkgs.emacs29-pgtk;
-  };
-
   #programs.vscode = {
   #  enable = true;
   #  extensions = with pkgs.vscode-extensions; [ vscodevim.vim bbenoist.Nix ms-vsliveshare.vsliveshare ];
@@ -133,12 +107,6 @@ in {
       ssh = "TERM=xterm-256color ssh";
       p = "noglob p";
     };
-    initExtra = ''
-      p() ${pkgs.python3}/bin/python -c "from math import *; print($*);"
-      export PATH=$PATH:~/bin
-      # https://github.com/NixOS/nixpkgs/issues/30121
-      setopt prompt_sp
-    '';
     plugins = [{
       name = "auto-notify";
       src = inputs.zsh-auto-notify;

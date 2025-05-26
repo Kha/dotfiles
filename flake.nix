@@ -1,17 +1,12 @@
 {
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-24.11;
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-25.05;
     unstable.url = github:NixOS/nixpkgs/nixos-unstable;
-    home-manager.url = github:rycee/home-manager/release-24.11;
+    home-manager.url = github:rycee/home-manager/release-25.05;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = github:NixOS/nixos-hardware;
-    nix-doom-emacs-unstraightened.url = github:marienz/nix-doom-emacs-unstraightened;
-    nix-doom-emacs-unstraightened.inputs.nixpkgs.follows = "";
     zsh-auto-notify.url = github:MichaelAquilina/zsh-auto-notify;
     zsh-auto-notify.flake = false;
-    niri.url = "github:sodiboo/niri-flake";
-    #niri.inputs.niri-src.follows = "niri-src";
-    #niri.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   # based on https://github.com/davidtwco/veritas/blob/master/flake.nix
@@ -31,7 +26,6 @@
         nameValuePair name (nixosSystem {
           inherit system;
           modules = [
-            inputs.niri.nixosModules.niri
             ({ name, ... }: {
               # Set the hostname to the name of the configuration being applied (since the
               # configuration being applied is determined by the hostname).
@@ -41,7 +35,6 @@
               # Use the nixpkgs from the flake.
               nixpkgs = {
                 pkgs = pkgsBySystem."${system}";
-                overlays = [ inputs.niri.overlays.niri ];
               };
 
               # For compatibility with nix-shell, nix-build, etc.
@@ -75,7 +68,6 @@
         nameValuePair name ({ ... }: {
           imports = [
             (import config)
-            inputs.nix-doom-emacs-unstraightened.hmModule
           ];
 
           # For compatibility with nix-shell, nix-build, etc.

@@ -254,5 +254,16 @@
       }
     },
     "explorer.confirmDragAndDrop": false,
+    "terminal.integrated.stickyScroll.enabled": true,
+    "extensions.experimental.affinity": {
+      "vscodevim.vim": 1,
+    },
+    "remote.extensionKind": {
+        "joelrobichaud.vscode-task-notifier": [ "ui" ],
+        "jaredly.background-terminal-notifier": [ "ui" ],
+    },
+    //"lean4.serverArgs": [
+    //  "-DstderrAsMessages=false"
+    //],
     //"lean4.trace.server": "verbose",
   }
