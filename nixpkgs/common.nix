@@ -5,7 +5,10 @@
     # editing
     ispell vim_configurable unstable.vscode
     # dev
-    gitAndTools.gh gitAndTools.tig gdb meld python3 binutils jq unstable.elan hyperfine samply unstable.jujutsu
+    gitAndTools.gh gitAndTools.tig gdb meld python3 binutils jq unstable.elan hyperfine samply
+    unstable.jujutsu
+    # for jj
+    watchman
     # other cli apps
     fasd htop mpv file unzip psmisc libnotify
     # Rust all the things
