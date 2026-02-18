@@ -3,16 +3,15 @@
 {
   home.packages = with pkgs; [
     # editing
-    ispell vim_configurable unstable.vscode
+    ispell vim-full unstable.vscode
     # dev
-    gitAndTools.gh gitAndTools.tig gdb meld python3 binutils jq unstable.elan hyperfine samply
-    unstable.jujutsu
+    gh tig gdb meld python3 binutils jq unstable.elan hyperfine samply unstable.jujutsu
     # for jj
     watchman
     # other cli apps
     fasd htop mpv file unzip psmisc libnotify
     # Rust all the things
-    fd ripgrep gitAndTools.delta
+    fd ripgrep
   ];
 
   home.file = {
@@ -29,20 +28,20 @@
     flags = ["--disable-up-arrow"];
     settings.filter_mode = "directory";
   };
+  programs.delta.enable = true;
   programs.gh = {
     enable = true;
     settings.aliases.co = "pr checkout";
   };
   programs.git = {
-    delta.enable = true;
     enable = true;
-    userName = "Sebastian Ullrich";
-    userEmail = "sebasti@nullri.ch";
-    aliases = {
-      "co" = "checkout";
-      "st" = "status -s";
-    };
-    extraConfig = {
+    settings = {
+      user.name = "Sebastian Ullrich";
+      user.email = "sebasti@nullri.ch";
+      alias = {
+        "co" = "checkout";
+        "st" = "status -s";
+      };
       merge.conflictStyle = "diff3";
       pull.rebase = "true";
       rebase.autoStash = "true";

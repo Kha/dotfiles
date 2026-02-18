@@ -39,15 +39,11 @@
 
   services.upower.enable = true;
   services.upower.criticalPowerAction = "Hibernate";
-  services.logind.lidSwitch = "suspend-then-hibernate";
-  services.logind.powerKey = "suspend-then-hibernate";
+  services.logind.settings.Login.HandleLidSwitch = "suspend-then-hibernate";
+  services.logind.settings.Login.HandlePowerKey = "suspend-then-hibernate";
   systemd.sleep.extraConfig = "HibernateDelaySec=4h";
 
-  hardware.graphics.extraPackages = with pkgs; [
-    amdvlk
-    # encoding/decoding acceleration
-    libvdpau-va-gl vaapiVdpau
-  ];
+  hardware.graphics.enable = true;
 
   xdg.portal = {
     enable = true;
@@ -56,6 +52,10 @@
   };
 
   programs.niri.enable = true;
+  programs.steam.enable = true;
+  programs.nix-ld.enable = true;
+
+  environment.systemPackages = with pkgs; [ gamescope xwayland-satellite ];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
@@ -76,6 +76,11 @@
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
+
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="video4linux", ATTR{name}=="C922 Pro Stream Webcam", \
+    RUN+="${pkgs.v4l-utils}/bin/v4l2-ctl -d /dev/%k --set-ctrl=zoom_absolute=150"
+  '';
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

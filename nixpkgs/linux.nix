@@ -6,7 +6,7 @@
     sway xwayland dmenu i3status grim slurp wl-clipboard
     fuzzel waybar font-awesome
     # system
-    pavucontrol playerctl xdg-utils (adwaita-icon-theme.override { gnome = null; })
+    pavucontrol playerctl xdg-utils (adwaita-icon-theme.override { gnome = null; }) nautilus
     # fonts!
     iosevka
     # editing
@@ -40,6 +40,9 @@
 
   services.mako = {
     enable = true;
-    settings.default-timeout = 5000;
+    settings.default-timeout = 10000;
+    settings."mode=silent" = {
+      invisible = 1;
+    };
   };
 }

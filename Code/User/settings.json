@@ -92,6 +92,13 @@
         ]
       },
       {
+        "keys": "c.o",
+        "name": "lake build --old",
+        "type": "command",
+        "command": "workbench.action.tasks.runTask",
+        "args": "build-old",
+      },
+      {
         "keys": "m.languageId:lean4",
         "name": "Lean 4",
         "type": "bindings",
@@ -173,7 +180,6 @@
         ],
       },
     ],
-    "chronicler.ffmpeg-binary": "/nix/store/1b2hmf01dinyf2jrjaqgjnyinp7lad1q-ffmpeg-5.1.3-bin/bin/ffmpeg",
     "editor.rulers": [
       100
     ],
@@ -183,8 +189,6 @@
     // https://github.com/microsoft/vscode/issues/184124
     "window.titleBarStyle": "custom",
     "workbench.editor.empty.hint": "hidden",
-    "gitlens.ai.experimental.provider": "openai",
-    "gitlens.ai.experimental.openai.model": "gpt-4-1106-preview",
     "gitlens.advanced.messages": {
       "suppressCommitHasNoPreviousCommitWarning": true,
       "suppressCreatePullRequestPrompt": true
@@ -225,7 +229,6 @@
     //"git.autofetch": "all",
     "githubPullRequests.pushBranch": "always",
     "cSpell.diagnosticLevel": "Hint",
-    "visualjj.refreshInterval": 10,
     "terminal.integrated.commandsToSkipShell": [
         "-workbench.action.quickOpen"
     ],
@@ -254,7 +257,7 @@
       }
     },
     "explorer.confirmDragAndDrop": false,
-    "terminal.integrated.stickyScroll.enabled": true,
+    //"terminal.integrated.stickyScroll.enabled": true,
     "extensions.experimental.affinity": {
       "vscodevim.vim": 1,
     },
@@ -262,8 +265,43 @@
         "joelrobichaud.vscode-task-notifier": [ "ui" ],
         "jaredly.background-terminal-notifier": [ "ui" ],
     },
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "terminal.integrated.allowedLinkSchemes": [
+      "file",
+      "http",
+      "https",
+      "mailto",
+      "vscode",
+      "vscode-insiders",
+      "man"
+    ],
+    "github.copilot.enable": {
+      "*": true,
+      "plaintext": true,
+      "markdown": false,
+      "scminput": false,
+      "lean4": true
+    },
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+    "terminal.integrated.stickyScroll.enabled": false,
+    "lean4.logging.enabled": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "chat.tools.terminal.autoApprove": {
+      "lake build": {
+        "approve": true,
+        "matchCommandLine": true
+      },
+      "git add": true,
+      "git commit": true,
+      "^^^": true,
+      "ₑ": true
+    },
+    "terminal.integrated.suggest.enabled": false,
+    "claudeCode.preferredLocation": "panel",
     //"lean4.serverArgs": [
     //  "-DstderrAsMessages=false"
     //],
-    //"lean4.trace.server": "verbose",
+    //"lean4.trace.server": "messages",
   }

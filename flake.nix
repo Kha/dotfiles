@@ -1,8 +1,8 @@
 {
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-25.05;
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-25.11;
     unstable.url = github:NixOS/nixpkgs/nixos-unstable;
-    home-manager.url = github:rycee/home-manager/release-25.05;
+    home-manager.url = github:rycee/home-manager/release-25.11;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = github:NixOS/nixos-hardware;
     zsh-auto-notify.url = github:MichaelAquilina/zsh-auto-notify;
@@ -129,8 +129,6 @@
       # that host - consumed by the home-manager NixOS module for that host (if it exists)
       # or by `mkHomeManagerHomeConfiguration` for home-manager-only hosts.
       homeManagerConfigurations = mapAttrs' mkHomeManagerConfiguration {
-        wandersail = { system = "x86_64-linux"; config = ./nixpkgs/wandersail.nix; };
-
         theseus = { system = "x86_64-linux"; config = ./nixpkgs/wandersail.nix; };
 
         soothebox = { system = "x86_64-linux"; config = ./nixpkgs/wandersail.nix; };
@@ -147,8 +145,6 @@
       # Attribute set of hostnames to evaluated NixOS configurations. Consumed by `nixos-rebuild`
       # on those hosts.
       nixosConfigurations = mapAttrs' mkNixOsConfiguration {
-        wandersail = { system = "x86_64-linux"; config = ./nixos/wandersail.nix; };
-
         theseus = { system = "x86_64-linux"; config = ./nixos/theseus.nix; };
 
         soothebox = { system = "x86_64-linux"; config = ./nixos/soothebox.nix; };

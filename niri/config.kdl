@@ -172,7 +172,6 @@ layout {
 // spawn-at-startup "alacritty" "-e" "fish"
 spawn-at-startup "alacritty"
 spawn-at-startup "waybar"
-spawn-at-startup "mako"
 
 cursor {
     // Change the theme and size of the cursor as well as set the
