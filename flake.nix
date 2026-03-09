@@ -133,13 +133,11 @@
 
         soothebox = { system = "x86_64-linux"; config = ./nixpkgs/wandersail.nix; };
 
-        "sebastian@chonk.lean-fro.org" = { system = "x86_64-linux"; config = ./nixpkgs/chonk.nix; };
-        "sebastian@chonk2" = { system = "x86_64-linux"; config = ./nixpkgs/chonk.nix; };
+        "sebastian@chungus" = { system = "x86_64-linux"; config = ./nixpkgs/chonk.nix; };
       };
 
       homeConfigurations = mapAttrs' mkHomeManagerHomeConfiguration {
-        "sebastian@chonk.lean-fro.org" = { system = "x86_64-linux"; };
-        "sebastian@chonk2" = { system = "x86_64-linux"; };
+        "sebastian@chungus" = { system = "x86_64-linux"; };
       };
 
       # Attribute set of hostnames to evaluated NixOS configurations. Consumed by `nixos-rebuild`
