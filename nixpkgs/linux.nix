@@ -8,7 +8,7 @@
     # system
     pavucontrol playerctl xdg-utils (adwaita-icon-theme.override { gnome = null; }) nautilus
     # fonts!
-    iosevka
+    iosevka liberation_ttf
     # editing
     libreoffice
     # dev
