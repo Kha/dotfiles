@@ -5,6 +5,7 @@
     ./common.nix
     inputs.home-manager.nixosModules.home-manager
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
+    inputs.niri-flake.nixosModules.niri
   ];
 
   hardware.cpu.amd.updateMicrocode = true;

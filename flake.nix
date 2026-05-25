@@ -7,6 +7,10 @@
     nixos-hardware.url = github:NixOS/nixos-hardware;
     zsh-auto-notify.url = github:MichaelAquilina/zsh-auto-notify;
     zsh-auto-notify.flake = false;
+    niri-flake.url = github:sodiboo/niri-flake;
+    niri-flake.inputs.nixpkgs.follows = "unstable";
+    dms.url = "github:AvengeMedia/DankMaterialShell/stable";
+    dms.inputs.nixpkgs.follows = "unstable";
   };
 
   # based on https://github.com/davidtwco/veritas/blob/master/flake.nix
