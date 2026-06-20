@@ -1,6 +1,6 @@
 {
     "keyboard.dispatch": "keyCode",
-    "workbench.colorTheme": "Solarized Light",
+    "workbench.colorTheme": "Experimental Light",
     "workbench.colorCustomizations": {
       "[Solarized Light]": {"editor.selectionHighlightBackground": "#e9dcc5"}
     },
