@@ -90,7 +90,6 @@
   # services.xserver.xkbOptions = "eurosign:e";
 
   programs.sway.enable = true;
-  programs.light.enable = true;
   # necessary to get `nix` completion
   programs.zsh.enable = true;
 

@@ -42,7 +42,7 @@
   services.upower.criticalPowerAction = "Hibernate";
   services.logind.settings.Login.HandleLidSwitch = "suspend-then-hibernate";
   services.logind.settings.Login.HandlePowerKey = "suspend-then-hibernate";
-  systemd.sleep.extraConfig = "HibernateDelaySec=4h";
+  systemd.sleep.settings.Sleep.HibernateDelaySec = "4h";
 
   hardware.graphics.enable = true;
 
