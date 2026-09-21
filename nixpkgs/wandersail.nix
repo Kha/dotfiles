@@ -7,5 +7,6 @@
     networkmanager_dmenu
     pdfpc
     perf
+    signal-desktop
   ];
 }

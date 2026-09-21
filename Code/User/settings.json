@@ -1,6 +1,6 @@
 {
     "keyboard.dispatch": "keyCode",
-    "workbench.colorTheme": "Experimental Light",
+    "workbench.colorTheme": "Light 2026",
     "workbench.colorCustomizations": {
       "[Solarized Light]": {"editor.selectionHighlightBackground": "#e9dcc5"}
     },
@@ -283,8 +283,6 @@
       "lean4": true
     },
     "workbench.secondarySideBar.defaultVisibility": "hidden",
-    "gitlens.ai.model": "vscode",
-    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
     "terminal.integrated.stickyScroll.enabled": false,
     "lean4.logging.enabled": false,
     "security.workspace.trust.untrustedFiles": "open",
@@ -300,6 +298,11 @@
     },
     "terminal.integrated.suggest.enabled": false,
     "claudeCode.preferredLocation": "panel",
+    "claudeCode.initialPermissionMode": "bypassPermissions",
+    "claudeCode.allowDangerouslySkipPermissions": true,
+    "githubPullRequests.terminalLinksHandler": "github",
+    "remote.SSH.connectTimeout": 60,
+    "claudeCode.hideOnboarding": true,
     //"lean4.serverArgs": [
     //  "-DstderrAsMessages=false"
     //],

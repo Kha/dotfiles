@@ -249,6 +249,10 @@
       "Mod+Shift+P".action = power-off-monitors;
 
       "Mod+Shift+Ctrl+T".action = toggle-debug-tint;
+
+      "Mod+Shift+Ctrl+F".action = toggle-windowed-fullscreen;
+      "Mod+Ctrl+C".action = set-dynamic-cast-window;
+      "Mod+Shift+Ctrl+C".action = clear-dynamic-cast-target;
     };
   };
 }
