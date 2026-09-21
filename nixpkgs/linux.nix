@@ -56,7 +56,6 @@
     niri.enableSpawn = true;
     niri.enableKeybinds = true;
     niri.includes.enable = false;
-    dgop.package = unstable.dgop;
   };
 
   programs.niri.settings = {
